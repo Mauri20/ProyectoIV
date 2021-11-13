@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">ZeligStore</string>
+    <string name="login_hint">Usuario</string>
+    <string name="password_hint">Contraseña</string>
+</resources>
