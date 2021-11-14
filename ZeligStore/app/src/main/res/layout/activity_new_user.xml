@@ -60,9 +60,9 @@
                         android:layout_marginTop="@dimen/loginViewsMargin">
 
                         <EditText
-                            android:id="@+id/editTextName"
+                            android:id="@+id/et_Name"
                             style="@style/modifiedEditText"
-                            android:hint="Nombre"
+                            android:hint="@string/name"
                             android:inputType="textPersonName"
                             android:maxLines="1"
                             android:textSize="8pt" />
@@ -74,7 +74,7 @@
                         android:layout_marginTop="@dimen/loginViewsMargin">
 
                         <EditText
-                            android:id="@+id/editTextEmail"
+                            android:id="@+id/et_User"
                             style="@style/modifiedEditText"
                             android:hint="@string/login_hint"
                             android:inputType="text"
@@ -88,9 +88,9 @@
                         android:layout_marginTop="@dimen/loginViewsMargin">
 
                         <EditText
-                            android:id="@+id/editTextMobile"
+                            android:id="@+id/et_Phone"
                             style="@style/modifiedEditText"
-                            android:hint="Número de Teléfono"
+                            android:hint="@string/number"
                             android:inputType="phone"
                             android:maxLines="1"
                             android:textSize="8pt" />
@@ -102,7 +102,7 @@
                         android:layout_marginTop="@dimen/loginViewsMargin">
 
                         <EditText
-                            android:id="@+id/editTextPassword"
+                            android:id="@+id/et_Password"
                             style="@style/modifiedEditText"
                             android:hint="@string/password_hint"
                             android:inputType="textPassword"
@@ -111,11 +111,12 @@
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <br.com.simplepass.loading_button_lib.customViews.CircularProgressButton
-                        android:id="@+id/cirRegisterButton"
+                        android:id="@+id/btn_Save"
                         style="@style/loginButton"
                         android:layout_gravity="center_horizontal"
                         android:layout_marginTop="@dimen/loginViewsMargin"
-                        android:text="Registrar"
+                        android:onClick="saveUser"
+                        android:text="@string/save"
                         android:textSize="8pt"
                         app:initialCornerAngle="27dp"
                         app:spinning_bar_color="#FFF"

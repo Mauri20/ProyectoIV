@@ -37,7 +37,7 @@
                 style="@style/parent"
                 android:layout_marginTop="@dimen/loginViewsMargin">
                 <EditText
-                    android:id="@+id/editTextEmail"
+                    android:id="@+id/et_User"
                     style="@style/modifiedEditText"
                     android:hint="@string/login_hint"
                     android:inputType="text"
@@ -49,7 +49,7 @@
                 style="@style/parent"
                 android:layout_marginTop="@dimen/loginViewsMargin">
                 <EditText
-                    android:id="@+id/editTextPassword"
+                    android:id="@+id/et_Password"
                     style="@style/modifiedEditText"
                     android:hint="@string/password_hint"
                     android:inputType="textPassword"
@@ -57,18 +57,21 @@
                     android:maxLines="1" />
             </com.google.android.material.textfield.TextInputLayout>
             <TextView
+                android:id="@+id/tv_Forgot"
                 style="@style/viewParent"
                 android:layout_gravity="end"
                 android:layout_marginTop="10dp"
                 android:text="¿Olvidaste tú contraseña?"
                 android:textColor="@color/primaryTextColor"
                 android:textSize="6pt" />x
+
             <br.com.simplepass.loading_button_lib.customViews.CircularProgressButton
-                android:id="@+id/cirLoginButton"
+                android:id="@+id/btn_Login"
                 style="@style/loginButton"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="@dimen/loginViewsMargin"
-                android:text="Ingresar"
+                android:onClick="evalCredentials"
+                android:text="@string/login"
                 android:textSize="8pt"
                 app:initialCornerAngle="27dp"
                 app:spinning_bar_color="#FFF"
@@ -133,6 +136,7 @@
         android:layout_alignParentRight="true"
         android:layout_marginTop="20dp"
         android:background="@drawable/ic_side_bg" />
+
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
