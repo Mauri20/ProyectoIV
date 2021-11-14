@@ -18,7 +18,8 @@
         android:theme="@style/Theme.ZeligStore">
         <activity
             android:name=".MenuActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".LoginActivity"
             android:exported="true"
