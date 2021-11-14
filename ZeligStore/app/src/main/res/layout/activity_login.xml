@@ -22,18 +22,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <TextView
-                    style="@style/viewParent.headerText.NoMode"
-                    android:layout_alignParentLeft="true"
-                    android:layout_centerVertical="true"
-                    android:paddingLeft="15pt"
-                    android:text="Ya tienes \n una \n Cuenta?" />
-
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
                     android:layout_alignParentRight="true"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginRight="64dp"
                     android:paddingRight="15pt"
                     android:src="@drawable/zelig" />
             </RelativeLayout>
@@ -65,7 +60,7 @@
                 style="@style/viewParent"
                 android:layout_gravity="end"
                 android:layout_marginTop="10dp"
-                android:text="Olvidaste la contraseña?"
+                android:text="¿Olvidaste tú contraseña?"
                 android:textColor="@color/primaryTextColor"
                 android:textSize="6pt" />x
             <br.com.simplepass.loading_button_lib.customViews.CircularProgressButton
@@ -83,7 +78,7 @@
                 style="@style/parent"
                 android:layout_marginTop="@dimen/loginViewsMargin"
                 android:onClick="onLoginClick"
-                android:text="Nuevo usuario? Regístrate aquí!"
+                android:text="¿Aún no eres un usuario?, \nRegistrate aquí"
                 android:textAlignment="center"
                 android:textColor="@color/themeColor"
                 android:textSize="19sp"
@@ -104,7 +99,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="6"
-                    android:text="Usar otros métodos"
+                    android:text="También puedes iniciar sesión con"
                     android:textAlignment="center"
                     android:textSize="15sp" />
                 <View
@@ -121,12 +116,12 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_facebook" />
+                    android:src="@drawable/facebook32" />
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
-                    android:src="@drawable/ic_google_plus" />
+                    android:src="@drawable/google" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

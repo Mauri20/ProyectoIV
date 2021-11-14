@@ -28,7 +28,7 @@
                     android:layout_alignParentLeft="true"
                     android:layout_centerVertical="true"
                     android:paddingLeft="10pt"
-                    android:text="Estas a \nun paso\nde unirte \n..."
+                    android:text="Estás a \nun paso\nde unirte. \n..."
                     android:textColor="@color/whiteTextColor"
                     android:textSize="15pt" />
 
@@ -126,7 +126,7 @@
                         style="@style/parent"
                         android:layout_marginTop="@dimen/loginViewsMargin"
                         android:onClick="onLoginClick"
-                        android:text="Ya tienes cuenta?"
+                        android:text="¿Ya tienes una cuenta?"
                         android:textAlignment="center"
                         android:textColor="@color/themeColor"
                         android:textSize="19sp"
@@ -152,7 +152,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="6"
-                    android:text="Usar otros métodos"
+                    android:text="También puedes iniciar sesión con"
                     android:textAlignment="center"
                     android:textColor="@color/whiteTextColor"
                     android:textSize="16sp" />
@@ -174,13 +174,13 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_facebook" />
+                    android:src="@drawable/facebook32" />
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
-                    android:src="@drawable/ic_google_plus" />
+                    android:src="@drawable/google" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
