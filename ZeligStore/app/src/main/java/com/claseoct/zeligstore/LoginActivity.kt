@@ -53,6 +53,7 @@ class LoginActivity : AppCompatActivity() {
         }
         if(contador==1){
             startActivity(Intent(this,MenuActivity::class.java))
+            overridePendingTransition(R.anim.slide_in_right,android.R.anim.slide_out_right);
             contador=0
         }else {
             Toast.makeText(this, "Credenciales Incorrectas", Toast.LENGTH_LONG).show()
