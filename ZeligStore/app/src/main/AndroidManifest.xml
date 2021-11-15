@@ -17,6 +17,24 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ZeligStore">
         <activity
+            android:name=".VansActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ReebokActivity"
+            android:exported="true" />
+        <activity
+            android:name=".NikeActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ConverseActivity"
+            android:exported="true" />
+        <activity
+            android:name=".AdidasActivity"
+            android:exported="true" />
+        <activity
+            android:name=".PumaActivity"
+            android:exported="true" />
+        <activity
             android:name=".MenuActivity"
             android:exported="false"
             android:theme="@style/AppTheme.NoActionBar" />
