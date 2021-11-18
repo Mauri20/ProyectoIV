@@ -14,6 +14,10 @@ import kotlinx.coroutines.launch
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+
+
 class NewUserActivity : AppCompatActivity() {
     //Creando las variables para los objetos
     private lateinit var etName:EditText
@@ -44,6 +48,39 @@ class NewUserActivity : AppCompatActivity() {
         }
     }
 
+    private fun VerifyTo(user:String){
+        CoroutineScope(Dispatchers.IO).launch {
+            val call = getRetrofit().create(UsersAPI::class.java).verifyUser(user)
+            val respuesta = call.body()
+
+            runOnUiThread{
+                if(call.isSuccessful){
+                    if(respuesta == true){
+                        println("=========> USUARIO ENCONTRADO")
+                        getMessageFailed()
+                    }
+                    else if(respuesta == false){
+                        println("=========> Not FOUND")
+
+                    }
+                }
+            }
+        }
+    }
+
+    fun getMessageFailed(){
+        Toast.makeText(this, "¡El usuario que está tratando de ingresar ya existe, por favor intente con otro!", Toast.LENGTH_LONG).show()
+    }
+
+    fun getMessageSuccesfully(){
+        Toast.makeText(this,"¡Has sido registrado con éxito!",Toast.LENGTH_LONG).show()
+    }
+
+    fun getRedirectLoginActivity(){
+        val inten=Intent(this,LoginActivity::class.java)
+        startActivity(inten)
+    }
+
     //Funcion para guardar
     fun saveUser(view: View?){
         //variables contenedoras del texto de los campos
@@ -53,15 +90,43 @@ class NewUserActivity : AppCompatActivity() {
         var password=etPassword.text.toString()
         //Evaluando si estan vacias
         if (!name.isEmpty()&&!user.isEmpty()&&!phone.isEmpty()&&!password.isEmpty()){
+            val dialogo =
+                AlertDialog.Builder(this) // NombreDeTuActividad.this, o getActivity() si es dentro de un fragmento
+                    .setPositiveButton("Registrame") { dialog, which ->
+                        CoroutineScope(Dispatchers.IO).launch {
+                            val call = getRetrofit().create(UsersAPI::class.java).verifyUser(user)
+                            val respuesta = call.body()
 
-            //Aca estamos haciendo uso del consumo de una API montada en un servidor remoto
-            //===============================================================================
-            val user:UsersClass = UsersClass(null, name, phone, user, password)
-            GuardarNuevo(user)
-            //===============================================================================
-            Toast.makeText(this,"¡Has sido registrado con éxito!",Toast.LENGTH_LONG).show()
-            val inten=Intent(this,LoginActivity::class.java)
-            startActivity(inten)
+                            runOnUiThread{
+                                if(call.isSuccessful){
+                                    if(respuesta == true){
+                                        println("=========> USUARIO ENCONTRADO")
+                                        getMessageFailed()
+                                    }
+                                    else if(respuesta == false){
+                                        println("=========> Not FOUND")
+                                        //Aca estamos haciendo uso del consumo de una API montada en un servidor remoto
+                                        //===============================================================================
+                                        val user:UsersClass = UsersClass(null, name, phone, user, password)
+                                        GuardarNuevo(user)
+                                        //===============================================================================
+                                        getMessageSuccesfully()
+                                        getRedirectLoginActivity()
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    .setNegativeButton(
+                        "Cancelar"
+                    ) { dialog, which -> // Hicieron click en el botón negativo, no confirmaron
+                        // Simplemente descartamos el diálogo
+                        dialog.dismiss()
+                    }
+                    .setTitle("Confirmar") // El título
+                    .setMessage("¿Estas seguro que deseas registrarte ahora?") // El mensaje
+                    .create() // No olvides llamar a Create, ¡pues eso crea el AlertDialog!
+            dialogo.show();
         }else{
             Toast.makeText(this,"¡Por favor, completa todos los campos!",Toast.LENGTH_LONG).show()
         }

@@ -38,11 +38,27 @@ public class usuariosController {
         return new ResponseEntity(userLoger, HttpStatus.OK);
     }*/
 
+    //=========== Funcion para verificar el LOGIN ==========
     @GetMapping("/checkUser/{user}/{pass}")
     public boolean sp_LoginAPP(@PathVariable("user") String user, @PathVariable("pass") String pass){
         boolean validar = false;
         List<usuariosEntitie> userLoger = userRepository.sp_LoginAPP(user, pass);
         if(!userLoger.isEmpty()){
+            System.out.println("=> User has been found succesfully!");
+            return validar = true;
+        }
+        else{
+            System.out.println("=> User has not been found :(");
+            return validar;
+        }
+    }
+
+    //=========== Funcion para verificar si ya existe el usuario ==========
+    @GetMapping("/checkUserIfExists/{user}")
+    public boolean sp_VerifyUser(@PathVariable("user") String user){
+        boolean validar = false;
+        List<usuariosEntitie> userVerify = userRepository.sp_s_Usuario(user);
+        if(!userVerify.isEmpty()){
             System.out.println("=> User has been found succesfully!");
             return validar = true;
         }

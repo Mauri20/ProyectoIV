@@ -11,4 +11,7 @@ public interface usuariosInterface extends CrudRepository<usuariosEntitie, Integ
 
     @Query(value = "{call sp_LoginApp(:PUsuario, :PPassword)}", nativeQuery = true)
     List<usuariosEntitie> sp_LoginAPP(@Param("PUsuario") String P_Usuario, @Param("PPassword") String P_Password);
+
+    @Query(value = "{call sp_s_usuario(:pUsuario)}", nativeQuery = true)
+    List<usuariosEntitie> sp_s_Usuario(@Param("pUsuario") String p_Usuario);
 }

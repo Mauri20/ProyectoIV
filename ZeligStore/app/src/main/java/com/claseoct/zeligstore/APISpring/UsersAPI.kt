@@ -15,4 +15,7 @@ interface UsersAPI {
 
     @GET("Usuarios/checkUser/{user}/{pass}")
     suspend fun loginUser(@Path("user") user:String, @Path("pass") pass:String):Response<Boolean>
+
+    @GET("Usuarios/checkUserIfExists/{user}")
+    suspend fun verifyUser(@Path("user") user: String):Response<Boolean>
 }
