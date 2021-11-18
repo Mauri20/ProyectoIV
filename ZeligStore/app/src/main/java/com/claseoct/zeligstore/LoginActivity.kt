@@ -6,6 +6,13 @@ import android.os.Bundle
 import android.view.View
 import android.widget.EditText
 import android.widget.Toast
+import com.claseoct.zeligstore.APISpring.UsersAPI
+import com.claseoct.zeligstore.Models.UsersClass
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import java.time.Duration
 import kotlin.system.exitProcess
 
@@ -14,15 +21,6 @@ class LoginActivity : AppCompatActivity() {
     //Preparando las variables
     private lateinit var etUser:EditText
     private lateinit var etPassword: EditText
-    //Datos de usuarios para el logueo
-    var userOne= arrayOf("Mauricio","Mauri","7227-2324","1234")
-    var userTwo= arrayOf("Fatima","Fati","7734-2445","1234")
-    var userThree= arrayOf("Andres","Andres","7275-6724","1234")
-    var userFour= arrayOf("Jasmin","Jas","7646-9824","1234")
-    var userFive= arrayOf("Joshua","Josh","7765-2904","1234")
-    //variable con los datos para inicio de sesion
-    var credentials= arrayListOf(userOne,userTwo,userThree,userFour,userFive)
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,33 +29,57 @@ class LoginActivity : AppCompatActivity() {
         etUser=findViewById(R.id.et_User)
         etPassword=findViewById(R.id.et_Password)
 
-        //Recogiendo datos del Intent
-        val miIntent=intent.extras
-        val name=miIntent?.getString("name").toString()
-        val user=miIntent?.getString("user").toString()
-        val phone=miIntent?.getString("phone").toString()
-        val password=miIntent?.getString("pass").toString()
-        if(name!="null"&&user!="null"&&phone!="null"&&password!="null"){
-            val newUser= arrayOf(name,user,phone,password)
-            credentials.add(newUser)
-        }
-        credentials.forEach { println(it.get(1)) }
     }
+
+    //Funcion para mandar y recibir json a la API REST
+    private fun getRetrofit(): Retrofit {
+        return Retrofit.Builder()
+            .baseUrl("http://10.0.2.2:8080/ZeligStore/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+    }
+
+    private fun LogearTo(user:String, pass:String){
+        CoroutineScope(Dispatchers.IO).launch {
+            val call = getRetrofit().create(UsersAPI::class.java).loginUser(user, pass)
+            val respuesta = call.body()
+
+            runOnUiThread{
+                if(call.isSuccessful){
+                    if(respuesta == true){
+                        println("=========> Bienvenido")
+                        nextActivityMenu()
+                    }
+                    else if(respuesta == false){
+                        println("=========> Not FOUND")
+                        getMessageFailed()
+                    }
+                }
+            }
+        }
+    }
+
     //Funcion para evaluar si hay registro de credenciales
     fun evalCredentials(view: View){
-        var result=false
-        var contador=0
-        credentials.forEach{
-            result = etUser.text.toString().equals(it.get(1)) && etPassword.text.toString().equals(it.get(3))
-            if (result) contador=1
+
+        var user = etUser.text.toString()
+        var pass = etPassword.text.toString()
+
+        if(user.isEmpty() || pass.isEmpty()){
+            Toast.makeText(this, "¡Por favor, completa todos los campos!", Toast.LENGTH_SHORT).show()
         }
-        if(contador==1){
-            startActivity(Intent(this,MenuActivity::class.java))
-            overridePendingTransition(R.anim.slide_in_right,android.R.anim.slide_out_right);
-            contador=0
-        }else {
-            Toast.makeText(this, "Credenciales Incorrectas", Toast.LENGTH_LONG).show()
+        else{
+            LogearTo(user, pass)
         }
+    }
+
+    fun nextActivityMenu(){
+        startActivity(Intent(this,MenuActivity::class.java))
+        overridePendingTransition(R.anim.slide_in_right,android.R.anim.slide_out_right);
+    }
+
+    fun getMessageFailed(){
+        Toast.makeText(this, "¡Usuario no encontrado, \nVerifica que hayas escrito bien tus credenciales!", Toast.LENGTH_LONG).show()
     }
 
     //Funcion para ir al Registro

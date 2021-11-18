@@ -53,24 +53,17 @@ class NewUserActivity : AppCompatActivity() {
         var password=etPassword.text.toString()
         //Evaluando si estan vacias
         if (!name.isEmpty()&&!user.isEmpty()&&!phone.isEmpty()&&!password.isEmpty()){
-            var newUser2= arrayOf(name,user,phone,password)
-
-            Toast.makeText(this,"Usuario Registrado",Toast.LENGTH_LONG).show()
-            val inten=Intent(this,LoginActivity::class.java)
-            inten.putExtra("name",name)
-            inten.putExtra("user",user)
-            inten.putExtra("phone",phone)
-            inten.putExtra("pass",password)
 
             //Aca estamos haciendo uso del consumo de una API montada en un servidor remoto
             //===============================================================================
             val user:UsersClass = UsersClass(null, name, phone, user, password)
             GuardarNuevo(user)
             //===============================================================================
-
+            Toast.makeText(this,"¡Has sido registrado con éxito!",Toast.LENGTH_LONG).show()
+            val inten=Intent(this,LoginActivity::class.java)
             startActivity(inten)
         }else{
-            Toast.makeText(this,"Debe completar los campos",Toast.LENGTH_LONG).show()
+            Toast.makeText(this,"¡Por favor, completa todos los campos!",Toast.LENGTH_LONG).show()
         }
     }
 
