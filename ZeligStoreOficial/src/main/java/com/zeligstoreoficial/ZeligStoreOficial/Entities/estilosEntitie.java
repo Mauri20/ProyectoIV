@@ -9,7 +9,7 @@ public class estilosEntitie {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
-    private Integer idEstilo;
+    private Integer idestilo;
     @Column
     private String nombre;
     @Column
@@ -17,13 +17,12 @@ public class estilosEntitie {
 
     //----------Methods GET and SET
 
-
-    public Integer getIdEstilo() {
-        return idEstilo;
+    public Integer getIdestilo() {
+        return idestilo;
     }
 
-    public void setIdEstilo(Integer idEstilo) {
-        this.idEstilo = idEstilo;
+    public void setIdestilo(Integer idestilo) {
+        this.idestilo = idestilo;
     }
 
     public String getNombre() {

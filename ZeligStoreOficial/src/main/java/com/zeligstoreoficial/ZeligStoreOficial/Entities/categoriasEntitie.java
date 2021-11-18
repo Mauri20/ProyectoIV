@@ -9,19 +9,18 @@ public class categoriasEntitie {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
-    private Integer idCategoria;
+    private Integer idcategoria;
     @Column
     private String nombre;
 
     //----------Methods GET and SET
 
-
-    public Integer getIdCategoria() {
-        return idCategoria;
+    public Integer getIdcategoria() {
+        return idcategoria;
     }
 
-    public void setIdCategoria(Integer idCategoria) {
-        this.idCategoria = idCategoria;
+    public void setIdcategoria(Integer idcategoria) {
+        this.idcategoria = idcategoria;
     }
 
     public String getNombre() {

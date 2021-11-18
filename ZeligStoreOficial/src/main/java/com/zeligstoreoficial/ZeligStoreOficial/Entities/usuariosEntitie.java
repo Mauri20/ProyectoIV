@@ -9,22 +9,25 @@ public class usuariosEntitie {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
-    private Integer idUsuario;
+    private Integer idusuario;
     @Column
     private String nombre;
     @Column
     private String telefono;
     @Column
+    private String usuario;
+    @Column
     private String contrasena;
 
     //----------Methods GET and SET
 
-    public Integer getIdUsuario() {
-        return idUsuario;
+
+    public Integer getIdusuario() {
+        return idusuario;
     }
 
-    public void setIdUsuario(Integer idUsuario) {
-        this.idUsuario = idUsuario;
+    public void setIdusuario(Integer idusuario) {
+        this.idusuario = idusuario;
     }
 
     public String getNombre() {
@@ -41,6 +44,14 @@ public class usuariosEntitie {
 
     public void setTelefono(String telefono) {
         this.telefono = telefono;
+    }
+
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
     }
 
     public String getContrasena() {

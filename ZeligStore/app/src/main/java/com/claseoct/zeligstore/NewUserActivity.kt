@@ -6,6 +6,13 @@ import android.os.Bundle
 import android.view.View
 import android.widget.EditText
 import android.widget.Toast
+import com.claseoct.zeligstore.APISpring.UsersAPI
+import com.claseoct.zeligstore.Models.UsersClass
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 class NewUserActivity : AppCompatActivity() {
     //Creando las variables para los objetos
@@ -23,6 +30,20 @@ class NewUserActivity : AppCompatActivity() {
         etPhone=findViewById(R.id.et_Phone)
         etPassword=findViewById(R.id.et_Password)
     }
+    //Funcion para mandar y recibir json a la API REST
+    private fun getRetrofit(): Retrofit {
+        return Retrofit.Builder()
+            .baseUrl("http://10.0.2.2:8080/ZeligStore/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+    }
+
+    private fun GuardarNuevo(user:UsersClass){
+        CoroutineScope(Dispatchers.IO).launch {
+            val call = getRetrofit().create(UsersAPI::class.java).nuevoRegistro(user)
+        }
+    }
+
     //Funcion para guardar
     fun saveUser(view: View?){
         //variables contenedoras del texto de los campos
@@ -33,12 +54,20 @@ class NewUserActivity : AppCompatActivity() {
         //Evaluando si estan vacias
         if (!name.isEmpty()&&!user.isEmpty()&&!phone.isEmpty()&&!password.isEmpty()){
             var newUser2= arrayOf(name,user,phone,password)
+
             Toast.makeText(this,"Usuario Registrado",Toast.LENGTH_LONG).show()
             val inten=Intent(this,LoginActivity::class.java)
             inten.putExtra("name",name)
             inten.putExtra("user",user)
             inten.putExtra("phone",phone)
             inten.putExtra("pass",password)
+
+            //Aca estamos haciendo uso del consumo de una API montada en un servidor remoto
+            //===============================================================================
+            val user:UsersClass = UsersClass(null, name, phone, user, password)
+            GuardarNuevo(user)
+            //===============================================================================
+
             startActivity(inten)
         }else{
             Toast.makeText(this,"Debe completar los campos",Toast.LENGTH_LONG).show()

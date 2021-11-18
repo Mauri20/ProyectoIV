@@ -9,7 +9,7 @@ public class zapatosEntitie {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
-    private Integer idZapato;
+    private Integer idzapato;
     @Column
     private Double tala;
     @Column
@@ -19,25 +19,24 @@ public class zapatosEntitie {
 
     @ManyToOne
     @JoinColumn(name = "idCategoria")
-    private categoriasEntitie idCategoria;
+    private categoriasEntitie idcategoria;
 
     @ManyToOne
     @JoinColumn(name = "idMarca")
-    private marcasEntitie idMarca;
+    private marcasEntitie idmarca;
 
     @ManyToOne
     @JoinColumn(name = "idEstilo")
-    private estilosEntitie idEstilo;
+    private estilosEntitie idestilo;
 
     //----------Methods GET and SET
 
-
-    public Integer getIdZapato() {
-        return idZapato;
+    public Integer getIdzapato() {
+        return idzapato;
     }
 
-    public void setIdZapato(Integer idZapato) {
-        this.idZapato = idZapato;
+    public void setIdzapato(Integer idzapato) {
+        this.idzapato = idzapato;
     }
 
     public Double getTala() {
@@ -64,27 +63,27 @@ public class zapatosEntitie {
         this.precio = precio;
     }
 
-    public categoriasEntitie getIdCategoria() {
-        return idCategoria;
+    public categoriasEntitie getIdcategoria() {
+        return idcategoria;
     }
 
-    public void setIdCategoria(categoriasEntitie idCategoria) {
-        this.idCategoria = idCategoria;
+    public void setIdcategoria(categoriasEntitie idcategoria) {
+        this.idcategoria = idcategoria;
     }
 
-    public marcasEntitie getIdMarca() {
-        return idMarca;
+    public marcasEntitie getIdmarca() {
+        return idmarca;
     }
 
-    public void setIdMarca(marcasEntitie idMarca) {
-        this.idMarca = idMarca;
+    public void setIdmarca(marcasEntitie idmarca) {
+        this.idmarca = idmarca;
     }
 
-    public estilosEntitie getIdEstilo() {
-        return idEstilo;
+    public estilosEntitie getIdestilo() {
+        return idestilo;
     }
 
-    public void setIdEstilo(estilosEntitie idEstilo) {
-        this.idEstilo = idEstilo;
+    public void setIdestilo(estilosEntitie idestilo) {
+        this.idestilo = idestilo;
     }
 }

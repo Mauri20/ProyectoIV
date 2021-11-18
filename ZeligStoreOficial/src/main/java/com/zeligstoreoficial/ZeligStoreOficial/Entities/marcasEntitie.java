@@ -9,19 +9,18 @@ public class marcasEntitie {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
-    private Integer idMarca;
+    private Integer idmarca;
     @Column
     private String nombre;
 
     //----------Methods GET and SET
 
-
-    public Integer getIdMarca() {
-        return idMarca;
+    public Integer getIdmarca() {
+        return idmarca;
     }
 
-    public void setIdMarca(Integer idMarca) {
-        this.idMarca = idMarca;
+    public void setIdmarca(Integer idmarca) {
+        this.idmarca = idmarca;
     }
 
     public String getNombre() {
