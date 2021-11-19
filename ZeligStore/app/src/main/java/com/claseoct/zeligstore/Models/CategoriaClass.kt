@@ -1,4 +1,4 @@
 package com.claseoct.zeligstore.Models
 
-class CategoriaClass(var idcategoria:Int, var nombrecat:String) {
+data class CategoriaClass(var idcategoria:Int, var nombrecat:String) {
 }
