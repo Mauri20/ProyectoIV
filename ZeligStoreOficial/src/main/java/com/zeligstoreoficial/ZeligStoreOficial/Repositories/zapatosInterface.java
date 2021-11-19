@@ -9,9 +9,10 @@ import java.util.List;
 
 public interface zapatosInterface extends CrudRepository<zapatosEntitie, Integer> {
 
-    @Query(value = "{call sp_s_Zapatos()}", nativeQuery = true)
-    List<zapatosEntitie> sp_s_Shoes();
+    @Query(value = "{call sp_s_Zapatos(:pMarca)}", nativeQuery = true)
+    List<zapatosEntitie> sp_s_Shoes(@Param("pMarca") String p_Marca);
 
-    @Query(value = "{call sp_s_ZapatosCategoria(:pCategoria)}", nativeQuery = true)
-    List<zapatosEntitie> sp_s_ShoesByCategory(@Param("pCategoria") String p_Categoria);
+    @Query(value = "{call sp_s_ZapatosCategoria(:pCategoria,:pMarca)}", nativeQuery = true)
+    List<zapatosEntitie> sp_s_ShoesByCategory(@Param("pCategoria") String p_Categoria,@Param("pMarca") String p_Marca);
+
 }

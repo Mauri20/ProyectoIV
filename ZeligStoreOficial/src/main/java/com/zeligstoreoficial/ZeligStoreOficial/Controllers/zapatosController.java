@@ -20,15 +20,15 @@ public class zapatosController {
     @Autowired
     private zapatosInterface zapatosRepository;
 
-    @GetMapping("/showAllZapatos")
-    public ResponseEntity<List<zapatosEntitie>> sp_LoginAPP(){
-        List<zapatosEntitie> zapatoslist = zapatosRepository.sp_s_Shoes();
+    @GetMapping("/showAllZapatos/{marca}")
+    public ResponseEntity<List<zapatosEntitie>> sp_showShoes(@PathVariable("marca") String marca){
+        List<zapatosEntitie> zapatoslist = zapatosRepository.sp_s_Shoes(marca);
         return new ResponseEntity(zapatoslist, HttpStatus.OK);
     }
 
-    @GetMapping("/showAllZapatosByCategory/{categoria}")
-    public ResponseEntity<List<zapatosEntitie>> sp_showShoesbyCategory(@PathVariable("categoria") String categoria){
-        List<zapatosEntitie> zapatoslist = zapatosRepository.sp_s_ShoesByCategory(categoria);
+    @GetMapping("/showAllZapatosByCategory/{categoria}/{marca}")
+    public ResponseEntity<List<zapatosEntitie>> sp_showShoesbyCategory(@PathVariable("categoria") String categoria,@PathVariable("marca") String marca){
+        List<zapatosEntitie> zapatoslist = zapatosRepository.sp_s_ShoesByCategory(categoria,marca);
         return new ResponseEntity(zapatoslist, HttpStatus.OK);
     }
 }
