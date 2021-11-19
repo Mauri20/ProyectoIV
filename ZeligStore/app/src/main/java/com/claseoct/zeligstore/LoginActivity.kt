@@ -51,7 +51,7 @@ class LoginActivity : AppCompatActivity() {
             runOnUiThread{
                 if(call.isSuccessful){
                     for(i in respuesta){
-                        println("Nombre: " + i.idzapato)
+                        println("Nombre Marca: " + i.idmarca.nombremar)
                     }
                 }
             }

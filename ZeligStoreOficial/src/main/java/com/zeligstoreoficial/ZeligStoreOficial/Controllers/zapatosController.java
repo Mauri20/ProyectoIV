@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,6 +23,12 @@ public class zapatosController {
     @GetMapping("/showAllZapatos")
     public ResponseEntity<List<zapatosEntitie>> sp_LoginAPP(){
         List<zapatosEntitie> zapatoslist = zapatosRepository.sp_s_Shoes();
+        return new ResponseEntity(zapatoslist, HttpStatus.OK);
+    }
+
+    @GetMapping("/showAllZapatosByCategory/{categoria}")
+    public ResponseEntity<List<zapatosEntitie>> sp_showShoesbyCategory(@PathVariable("categoria") String categoria){
+        List<zapatosEntitie> zapatoslist = zapatosRepository.sp_s_ShoesByCategory(categoria);
         return new ResponseEntity(zapatoslist, HttpStatus.OK);
     }
 }
