@@ -11,7 +11,7 @@ public class marcasEntitie {
     @Column
     private Integer idmarca;
     @Column
-    private String nombre;
+    private String nombremar;
 
     //----------Methods GET and SET
 
@@ -23,11 +23,11 @@ public class marcasEntitie {
         this.idmarca = idmarca;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getNombremar() {
+        return nombremar;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setNombremar(String nombremar) {
+        this.nombremar = nombremar;
     }
 }

@@ -11,22 +11,25 @@ public class zapatosEntitie {
     @Column
     private Integer idzapato;
     @Column
-    private Double tala;
+    private Double talla;
     @Column
     private String color;
     @Column
     private Double precio;
 
+    @Column
+    private String url;
+
     @ManyToOne
-    @JoinColumn(name = "idCategoria")
+    @JoinColumn(name = "idcategoria")
     private categoriasEntitie idcategoria;
 
     @ManyToOne
-    @JoinColumn(name = "idMarca")
-    private marcasEntitie idmarca;
+    @JoinColumn(name = "idmodelo")
+    private modelosEntitie idmodelo;
 
     @ManyToOne
-    @JoinColumn(name = "idEstilo")
+    @JoinColumn(name = "idestilo")
     private estilosEntitie idestilo;
 
     //----------Methods GET and SET
@@ -39,12 +42,12 @@ public class zapatosEntitie {
         this.idzapato = idzapato;
     }
 
-    public Double getTala() {
-        return tala;
+    public Double getTalla() {
+        return talla;
     }
 
-    public void setTala(Double tala) {
-        this.tala = tala;
+    public void setTalla(Double talla) {
+        this.talla = talla;
     }
 
     public String getColor() {
@@ -63,6 +66,14 @@ public class zapatosEntitie {
         this.precio = precio;
     }
 
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
     public categoriasEntitie getIdcategoria() {
         return idcategoria;
     }
@@ -71,12 +82,12 @@ public class zapatosEntitie {
         this.idcategoria = idcategoria;
     }
 
-    public marcasEntitie getIdmarca() {
-        return idmarca;
+    public modelosEntitie getIdmodelo() {
+        return idmodelo;
     }
 
-    public void setIdmarca(marcasEntitie idmarca) {
-        this.idmarca = idmarca;
+    public void setIdmodelo(modelosEntitie idmodelo) {
+        this.idmodelo = idmodelo;
     }
 
     public estilosEntitie getIdestilo() {

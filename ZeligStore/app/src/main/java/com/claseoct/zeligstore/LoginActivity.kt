@@ -7,6 +7,7 @@ import android.view.View
 import android.widget.EditText
 import android.widget.Toast
 import com.claseoct.zeligstore.APISpring.UsersAPI
+import com.claseoct.zeligstore.APISpring.ZapatosAPI
 import com.claseoct.zeligstore.Models.UsersClass
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -29,7 +30,10 @@ class LoginActivity : AppCompatActivity() {
         etUser=findViewById(R.id.et_User)
         etPassword=findViewById(R.id.et_Password)
 
+        Mostrar()
     }
+
+
 
     //Funcion para mandar y recibir json a la API REST
     private fun getRetrofit(): Retrofit {
@@ -37,6 +41,21 @@ class LoginActivity : AppCompatActivity() {
             .baseUrl("http://10.0.2.2:8080/ZeligStore/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
+    }
+
+    private fun Mostrar(){
+        CoroutineScope(Dispatchers.IO).launch {
+            val call = getRetrofit().create(ZapatosAPI::class.java).showAllShoes()
+            val respuesta = call.body()?: emptyList()
+
+            runOnUiThread{
+                if(call.isSuccessful){
+                    for(i in respuesta){
+                        println("Nombre: " + i.idzapato)
+                    }
+                }
+            }
+        }
     }
 
     private fun LogearTo(user:String, pass:String){

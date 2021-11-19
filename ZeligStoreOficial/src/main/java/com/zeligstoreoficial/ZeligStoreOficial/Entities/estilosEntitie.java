@@ -11,9 +11,7 @@ public class estilosEntitie {
     @Column
     private Integer idestilo;
     @Column
-    private String nombre;
-    @Column
-    private String modelo;
+    private String nombreest;
 
     //----------Methods GET and SET
 
@@ -25,19 +23,11 @@ public class estilosEntitie {
         this.idestilo = idestilo;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getNombreest() {
+        return nombreest;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getModelo() {
-        return modelo;
-    }
-
-    public void setModelo(String modelo) {
-        this.modelo = modelo;
+    public void setNombreest(String nombreest) {
+        this.nombreest = nombreest;
     }
 }

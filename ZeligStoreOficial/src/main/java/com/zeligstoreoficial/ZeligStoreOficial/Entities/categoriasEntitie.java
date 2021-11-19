@@ -11,7 +11,7 @@ public class categoriasEntitie {
     @Column
     private Integer idcategoria;
     @Column
-    private String nombre;
+    private String nombrecat;
 
     //----------Methods GET and SET
 
@@ -23,11 +23,11 @@ public class categoriasEntitie {
         this.idcategoria = idcategoria;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getNombrecat() {
+        return nombrecat;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setNombrecat(String nombrecat) {
+        this.nombrecat = nombrecat;
     }
 }
