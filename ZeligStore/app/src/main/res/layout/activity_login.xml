@@ -13,11 +13,13 @@
         android:layout_alignParentTop="true"
         android:layout_centerInParent="true"
         android:paddingTop="20dp">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="20dp">
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -32,30 +34,35 @@
                     android:paddingRight="15pt"
                     android:src="@drawable/zelig" />
             </RelativeLayout>
+
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/textInputEmail"
                 style="@style/parent"
                 android:layout_marginTop="@dimen/loginViewsMargin">
+
                 <EditText
                     android:id="@+id/et_User"
                     style="@style/modifiedEditText"
                     android:hint="@string/login_hint"
                     android:inputType="text"
-                    android:textSize="8pt"
-                    android:maxLines="1" />
+                    android:maxLines="1"
+                    android:textSize="8pt" />
             </com.google.android.material.textfield.TextInputLayout>
+
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/textInputPassword"
                 style="@style/parent"
                 android:layout_marginTop="@dimen/loginViewsMargin">
+
                 <EditText
                     android:id="@+id/et_Password"
                     style="@style/modifiedEditText"
                     android:hint="@string/password_hint"
                     android:inputType="textPassword"
-                    android:textSize="8pt"
-                    android:maxLines="1" />
+                    android:maxLines="1"
+                    android:textSize="8pt" />
             </com.google.android.material.textfield.TextInputLayout>
+
             <TextView
                 android:id="@+id/tv_Forgot"
                 style="@style/viewParent"
@@ -63,7 +70,7 @@
                 android:layout_marginTop="10dp"
                 android:text="¿Olvidaste tú contraseña?"
                 android:textColor="@color/primaryTextColor"
-                android:textSize="6pt" />x
+                android:textSize="6pt" />
 
             <br.com.simplepass.loading_button_lib.customViews.CircularProgressButton
                 android:id="@+id/btn_Login"
@@ -86,17 +93,20 @@
                 android:textColor="@color/themeColor"
                 android:textSize="19sp"
                 android:textStyle="bold" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
                 android:gravity="center"
                 android:weightSum="12">
+
                 <View
                     android:layout_width="0dp"
                     android:layout_height="1dp"
                     android:layout_weight="3"
                     android:background="@color/colorPrimaryDark" />
+
                 <TextView
                     style="@style/viewParent.headerText.NoMode"
                     android:layout_width="wrap_content"
@@ -105,21 +115,25 @@
                     android:text="También puedes iniciar sesión con"
                     android:textAlignment="center"
                     android:textSize="15sp" />
+
                 <View
                     android:layout_width="0dp"
                     android:layout_height="1dp"
                     android:layout_weight="3"
                     android:background="@color/colorPrimaryDark" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:gravity="center">
+
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/facebook32" />
+
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

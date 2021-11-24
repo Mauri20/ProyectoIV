@@ -4,6 +4,45 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bg"
     tools:context=".ReebokActivity">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/tv_Catego"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:text="Categorías:"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:textSize="20sp"
+            />
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            >
+            <Spinner
+                android:id="@+id/sp_Catego"
+                android:popupBackground="@color/login_bk_color"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                />
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/cv_reebook"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

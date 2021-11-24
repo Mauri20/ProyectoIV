@@ -45,7 +45,7 @@ class LoginActivity : AppCompatActivity() {
 
     private fun Mostrar(){
         CoroutineScope(Dispatchers.IO).launch {
-            val call = getRetrofit().create(ZapatosAPI::class.java).showAllShoes()
+            val call = getRetrofit().create(ZapatosAPI::class.java).showAllShoes2("Zapatos/showAllZapatos/Reebook")
             val respuesta = call.body()?: emptyList()
 
             runOnUiThread{
@@ -57,6 +57,9 @@ class LoginActivity : AppCompatActivity() {
                         println("Talla: " + i.talla)
                         println("-------------------")
                     }
+                }
+                else{
+                    println("Error al traer los datos")
                 }
             }
         }
@@ -92,7 +95,11 @@ class LoginActivity : AppCompatActivity() {
             Toast.makeText(this, "¡Por favor, completa todos los campos!", Toast.LENGTH_SHORT).show()
         }
         else{
-            LogearTo(user, pass)
+            try {
+                LogearTo(user, pass)
+            }catch (e:Exception){
+                Toast.makeText(this, "¡Error al establecer la Conexión!", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
