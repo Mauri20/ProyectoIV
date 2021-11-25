@@ -19,7 +19,9 @@ public class usuariosEntitie {
     @Column
     private String contrasena;
 
-    //----------Methods GET and SET
+    @Column
+    private Integer tipousuario;
+//----------Methods GET and SET
 
 
     public Integer getIdusuario() {
@@ -60,5 +62,13 @@ public class usuariosEntitie {
 
     public void setContrasena(String contrasena) {
         this.contrasena = contrasena;
+    }
+
+    public Integer getTipousuario() {
+        return tipousuario;
+    }
+
+    public void setTipousuario(Integer tipousuario) {
+        this.tipousuario = tipousuario;
     }
 }

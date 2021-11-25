@@ -63,12 +63,12 @@
                     android:textSize="8pt" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <TextView
-                android:id="@+id/tv_Forgot"
+            <CheckBox
+                android:id="@+id/chbx_soyadmin"
                 style="@style/viewParent"
-                android:layout_gravity="end"
+                android:layout_gravity="start"
                 android:layout_marginTop="10dp"
-                android:text="¿Olvidaste tú contraseña?"
+                android:text="¡Soy administrador!"
                 android:textColor="@color/primaryTextColor"
                 android:textSize="6pt" />
 
@@ -84,6 +84,7 @@
                 app:spinning_bar_color="#FFF"
                 app:spinning_bar_padding="6dp"
                 app:spinning_bar_width="4dp" />
+
             <TextView
                 style="@style/parent"
                 android:layout_marginTop="@dimen/loginViewsMargin"

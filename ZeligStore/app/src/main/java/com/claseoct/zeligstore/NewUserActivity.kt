@@ -16,6 +16,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.widget.CheckBox
 
 
 class NewUserActivity : AppCompatActivity() {
@@ -24,6 +25,7 @@ class NewUserActivity : AppCompatActivity() {
     private lateinit var etUser:EditText
     private lateinit var etPhone:EditText
     private lateinit var etPassword:EditText
+    private lateinit var chbx_admin:CheckBox
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,6 +35,7 @@ class NewUserActivity : AppCompatActivity() {
         etUser=findViewById(R.id.et_User)
         etPhone=findViewById(R.id.et_Phone)
         etPassword=findViewById(R.id.et_Password)
+        chbx_admin=findViewById(R.id.chbx_admin)
     }
     //Funcion para mandar y recibir json a la API REST
     private fun getRetrofit(): Retrofit {
@@ -88,6 +91,15 @@ class NewUserActivity : AppCompatActivity() {
         var user=etUser.text.toString()
         var phone=etPhone.text.toString()
         var password=etPassword.text.toString()
+        var admin = 0;
+
+        if(chbx_admin.isChecked){
+            admin = 1
+        }
+        else{
+            admin = 0
+        }
+
         //Evaluando si estan vacias
         if (!name.isEmpty()&&!user.isEmpty()&&!phone.isEmpty()&&!password.isEmpty()){
             val dialogo =
@@ -107,7 +119,7 @@ class NewUserActivity : AppCompatActivity() {
                                         println("=========> Not FOUND")
                                         //Aca estamos haciendo uso del consumo de una API montada en un servidor remoto
                                         //===============================================================================
-                                        val user:UsersClass = UsersClass(null, name, phone, user, password)
+                                        val user:UsersClass = UsersClass(null, name, phone, user, password, admin)
                                         GuardarNuevo(user)
                                         //===============================================================================
                                         getMessageSuccesfully()

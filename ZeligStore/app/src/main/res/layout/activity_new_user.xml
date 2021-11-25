@@ -108,6 +108,11 @@
                             android:inputType="textPassword"
                             android:maxLines="1"
                             android:textSize="8pt" />
+                        <CheckBox
+                            android:id="@+id/chbx_admin"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="¡Quiero ser administrador!"></CheckBox>
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <br.com.simplepass.loading_button_lib.customViews.CircularProgressButton
