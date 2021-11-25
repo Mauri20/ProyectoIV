@@ -21,7 +21,8 @@
             android:exported="true" />
         <activity
             android:name=".ReebokActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".NikeActivity"
             android:exported="true" />

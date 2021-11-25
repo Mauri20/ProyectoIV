@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.claseoct.zeligstore.Models.ZapatosClass
 import com.claseoct.zeligstore.R
 import com.claseoct.zeligstore.databinding.ItemRebookBinding
-import com.squareup.picasso.Picasso
 
 class ReebookHolder(view: View):RecyclerView.ViewHolder(view) {
     private val binding=ItemRebookBinding.bind(view)
@@ -17,9 +16,9 @@ class ReebookHolder(view: View):RecyclerView.ViewHolder(view) {
         var bitMap:Bitmap=BitmapFactory.decodeByteArray(convertToBytes,0,convertToBytes.size)
         binding.ivItemReebook.setImageBitmap(bitMap)
         binding.tvModelo.setText(zapato.idmodelo.nombremod)
-        binding.tvTalla.setText(zapato.talla.toString())
+        binding.tvTalla.setText("Talla: " + zapato.talla.toString())
         binding.tvEstilo.setText(zapato.idestilo.nombreest)
-        binding.tvPrecio.setText(zapato.precio.toString())
+        binding.tvPrecio.setText("$"+zapato.precio.toString())
 
     }
 }
