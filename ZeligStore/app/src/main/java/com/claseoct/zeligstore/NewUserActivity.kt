@@ -16,6 +16,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.view.LayoutInflater
 import android.widget.CheckBox
 
 
@@ -75,6 +76,10 @@ class NewUserActivity : AppCompatActivity() {
         Toast.makeText(this, "¡El usuario que está tratando de ingresar ya existe, por favor intente con otro!", Toast.LENGTH_LONG).show()
     }
 
+    fun getMessageFailedPin(){
+        Toast.makeText(this, "¡PIN INCORRECTO!", Toast.LENGTH_LONG).show()
+    }
+
     fun getMessageSuccesfully(){
         Toast.makeText(this,"¡Has sido registrado con éxito!",Toast.LENGTH_LONG).show()
     }
@@ -92,13 +97,7 @@ class NewUserActivity : AppCompatActivity() {
         var phone=etPhone.text.toString()
         var password=etPassword.text.toString()
         var admin = 0;
-
-        if(chbx_admin.isChecked){
-            admin = 1
-        }
-        else{
-            admin = 0
-        }
+        val accessPin = 12345
 
         //Evaluando si estan vacias
         if (!name.isEmpty()&&!user.isEmpty()&&!phone.isEmpty()&&!password.isEmpty()){
@@ -117,13 +116,51 @@ class NewUserActivity : AppCompatActivity() {
                                     }
                                     else if(respuesta == false){
                                         println("=========> Not FOUND")
-                                        //Aca estamos haciendo uso del consumo de una API montada en un servidor remoto
-                                        //===============================================================================
-                                        val user:UsersClass = UsersClass(null, name, phone, user, password, admin)
-                                        GuardarNuevo(user)
-                                        //===============================================================================
-                                        getMessageSuccesfully()
-                                        getRedirectLoginActivity()
+                                        if(chbx_admin.isChecked){
+                                            admin = 1
+
+                                            val builder = AlertDialog.Builder(this@NewUserActivity)
+                                            val inflater:LayoutInflater = layoutInflater
+                                            val dialogLayout:View = inflater.inflate(R.layout.edittext_dialog, null)
+                                            val editText:EditText = dialogLayout.findViewById<EditText>(R.id.et_securepin)
+                                            
+                                            with(builder){
+                                                setTitle("¡Código de acceso necesario!")
+                                                setPositiveButton("Verificar"){dialog, which->
+
+                                                    var pin = editText.text.toString().toInt()
+
+                                                    if(pin == accessPin){
+                                                        //Aca estamos haciendo uso del consumo de una API montada en un servidor remoto
+                                                        //===============================================================================
+                                                        val user:UsersClass = UsersClass(null, name, phone, user, password, admin)
+                                                        GuardarNuevo(user)
+                                                        //===============================================================================
+                                                        getMessageSuccesfully()
+                                                        getRedirectLoginActivity()
+                                                    }
+                                                    else{
+                                                        getMessageFailedPin()
+                                                    }
+                                                }
+                                                setNegativeButton("Cancelar"){dialog, which->
+                                                    dialog.dismiss()
+                                                }
+                                                setView(dialogLayout)
+                                                show()
+                                            }
+                                        }
+                                        else{
+                                            admin = 0
+
+                                            //Aca estamos haciendo uso del consumo de una API montada en un servidor remoto
+                                            //===============================================================================
+                                            val user:UsersClass = UsersClass(null, name, phone, user, password, admin)
+                                            GuardarNuevo(user)
+                                            //===============================================================================
+                                            getMessageSuccesfully()
+                                            getRedirectLoginActivity()
+                                        }
                                     }
                                 }
                             }
