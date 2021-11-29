@@ -63,15 +63,6 @@
                     android:textSize="8pt" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <CheckBox
-                android:id="@+id/chbx_soyadmin"
-                style="@style/viewParent"
-                android:layout_gravity="start"
-                android:layout_marginTop="10dp"
-                android:text="¡Soy administrador!"
-                android:textColor="@color/primaryTextColor"
-                android:textSize="6pt" />
-
             <br.com.simplepass.loading_button_lib.customViews.CircularProgressButton
                 android:id="@+id/btn_Login"
                 style="@style/loginButton"

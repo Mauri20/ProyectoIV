@@ -67,4 +67,10 @@ public class usuariosController {
             return validar;
         }
     }
+
+    @GetMapping("/returnTypeAccess/{user}/{password}")
+    public List<usuariosEntitie> retornarTypeUser(@PathVariable("user") String user, @PathVariable("password") String password){
+        List<usuariosEntitie> typeaccess = userRepository.sp_LoginAPP(user, password);
+        return typeaccess;
+    }
 }

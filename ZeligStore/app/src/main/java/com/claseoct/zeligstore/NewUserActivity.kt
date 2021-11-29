@@ -123,7 +123,7 @@ class NewUserActivity : AppCompatActivity() {
                                             val inflater:LayoutInflater = layoutInflater
                                             val dialogLayout:View = inflater.inflate(R.layout.edittext_dialog, null)
                                             val editText:EditText = dialogLayout.findViewById<EditText>(R.id.et_securepin)
-                                            
+
                                             with(builder){
                                                 setTitle("¡Código de acceso necesario!")
                                                 setPositiveButton("Verificar"){dialog, which->

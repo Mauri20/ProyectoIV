@@ -14,5 +14,4 @@ public interface zapatosInterface extends CrudRepository<zapatosEntitie, Integer
 
     @Query(value = "{call sp_s_ZapatosCategoria(:pCategoria,:pMarca)}", nativeQuery = true)
     List<zapatosEntitie> sp_s_ShoesByCategory(@Param("pCategoria") String p_Categoria,@Param("pMarca") String p_Marca);
-
 }

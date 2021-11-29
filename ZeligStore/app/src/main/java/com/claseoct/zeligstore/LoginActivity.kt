@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.CheckBox
 import android.widget.EditText
 import android.widget.Toast
 import com.claseoct.zeligstore.APISpring.UsersAPI
@@ -14,6 +15,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.lang.StringBuilder
 import java.time.Duration
 import kotlin.system.exitProcess
 
@@ -29,8 +31,6 @@ class LoginActivity : AppCompatActivity() {
         //Asignando los componentes a las variables
         etUser=findViewById(R.id.et_User)
         etPassword=findViewById(R.id.et_Password)
-
-        Mostrar()
     }
 
 
@@ -65,16 +65,59 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
+    private fun MostrarTipoUsuario(User:String, Pass:String){
+        CoroutineScope(Dispatchers.IO).launch {
+            val call = getRetrofit().create(UsersAPI::class.java).returnTypeUser(User, Pass)
+            val respuesta = call.body()
+
+            runOnUiThread{
+                if(call.isSuccessful){
+                    if (respuesta != null) {
+                        for (i in respuesta){
+                            println("=> Nombre de Usuario: " + i.usuario)
+                            println("=> Tipo Usuario: " + i.tipousuario)
+                        }
+                    }
+                }
+            }
+        }
+    }
+
     private fun LogearTo(user:String, pass:String){
+
         CoroutineScope(Dispatchers.IO).launch {
             val call = getRetrofit().create(UsersAPI::class.java).loginUser(user, pass)
+            val call_type = getRetrofit().create(UsersAPI::class.java).returnTypeUser(user, pass)
             val respuesta = call.body()
+            val respuesta_type = call_type.body()
 
             runOnUiThread{
                 if(call.isSuccessful){
                     if(respuesta == true){
                         println("=========> Bienvenido")
-                        nextActivityMenu()
+
+                        runOnUiThread{
+                            if(call_type.isSuccessful){
+                                if(respuesta_type != null){
+                                    for (i in respuesta_type){
+                                        //Acá es dónde validamos con los datos, si el usuario es administrador(1) o usuario corriente(0)
+                                        if(i.tipousuario==1){
+                                            println("${i.nombre}, tú eres administrador del sistema.")
+                                            MostrarTipoUsuario(user, pass)
+                                            nextActivityMenu()
+                                        }
+                                        else if(i.tipousuario==0){
+                                            println("${i.nombre}, tú eres un usuario corriente.")
+                                            MostrarTipoUsuario(user, pass)
+                                            nextActivityMenu()
+                                        }
+                                        else if(i.tipousuario==null){
+                                            println("Ha ocurrido un error inesperado!!")
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
                     else if(respuesta == false){
                         println("=========> Not FOUND")
@@ -97,6 +140,8 @@ class LoginActivity : AppCompatActivity() {
         else{
             try {
                 LogearTo(user, pass)
+                etUser.text = null
+                etPassword.text = null
             }catch (e:Exception){
                 Toast.makeText(this, "¡Error al establecer la Conexión!", Toast.LENGTH_SHORT).show()
             }
@@ -111,6 +156,7 @@ class LoginActivity : AppCompatActivity() {
     fun getMessageFailed(){
         Toast.makeText(this, "¡Usuario no encontrado, \nVerifica que hayas escrito bien tus credenciales!", Toast.LENGTH_LONG).show()
     }
+
 
     //Funcion para ir al Registro
     fun onLoginClick(view: View?) {
