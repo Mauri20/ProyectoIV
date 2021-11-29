@@ -14,8 +14,6 @@ public interface zapatosInterface extends CrudRepository<zapatosEntitie, Integer
 
     @Query(value = "{call sp_s_ZapatosCategoria(:pCategoria,:pMarca)}", nativeQuery = true)
     List<zapatosEntitie> sp_s_ShoesByCategory(@Param("pCategoria") String p_Categoria,@Param("pMarca") String p_Marca);
-<<<<<<< Updated upstream
-=======
 
     @Query(value = "{call sp_i_Zapatos(:pTalla,:pColor,:pPrecio,:pUrl,:pIdCategoria,:pIdModelo,:pIdEstilo)}",nativeQuery = true)
     Integer sp_i_Zapatos(
@@ -27,5 +25,4 @@ public interface zapatosInterface extends CrudRepository<zapatosEntitie, Integer
             @Param("pIdModelo") Integer p_IdModelo,
             @Param("pIdEstilo") Integer p_IdEstilo
     );
->>>>>>> Stashed changes
 }
