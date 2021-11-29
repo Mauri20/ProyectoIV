@@ -1,5 +1,6 @@
 package com.claseoct.zeligstore.APISpring
 
+import com.claseoct.zeligstore.Models.EstiloClass
 import com.claseoct.zeligstore.Models.ZapatosClass
 import retrofit2.Response
 import retrofit2.http.GET
@@ -14,4 +15,8 @@ interface ZapatosAPI {
     //Funcion para cargar los zapatos por categoria
     @GET
     suspend fun showAllShoes2(@Url url:String): Response<List<ZapatosClass>>
+
+    //Funcion para traer los estilos de los zapatos
+    @GET
+    suspend fun showStyles():Response<List<EstiloClass>>
 }

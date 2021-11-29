@@ -17,12 +17,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ZeligStore">
         <activity
+            android:name=".ZapatoActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
             android:name=".VansActivity"
             android:exported="true" />
         <activity
             android:name=".ReebokActivity"
             android:exported="true"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".NikeActivity"
             android:exported="true" />

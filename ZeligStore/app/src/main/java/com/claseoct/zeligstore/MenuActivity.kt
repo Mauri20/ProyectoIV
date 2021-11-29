@@ -4,13 +4,27 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.ImageView
 import android.widget.Toast
 
 class MenuActivity : AppCompatActivity() {
-
+    private lateinit var addShoes:ImageView
+    var IDACTIVO=1
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_menu)
+        addShoes=findViewById(R.id.addzapato)
+        addShoes.setOnClickListener{
+            newZapato(IDACTIVO)
+        }
+    }
+    fun newZapato(status:Int){
+        if (status!=0){
+            startActivity(Intent(this,ZapatoActivity::class.java))
+            overridePendingTransition(R.anim.slide_in_right,android.R.anim.slide_out_right);
+        }else{
+            Toast.makeText(this, "Debes ser Administrador", Toast.LENGTH_SHORT).show()
+        }
     }
 
     //Funcion para seleccionar una marca
