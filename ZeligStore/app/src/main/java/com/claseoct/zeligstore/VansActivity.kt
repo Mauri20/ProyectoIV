@@ -1,5 +1,6 @@
 package com.claseoct.zeligstore
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -118,5 +119,12 @@ class VansActivity : AppCompatActivity() {
                 // Nada fue seleccionado. Por cierto, no he visto que este método se desencadene
             }
         }
+    }
+    override fun onBackPressed()
+    {
+        super.onBackPressed()
+        val returnIntent = Intent(this, MenuActivity::class.java)
+        startActivity(returnIntent)
+        finish()
     }
 }

@@ -1,29 +1,27 @@
 package com.claseoct.zeligstore
 
+
+import android.app.Dialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.CheckBox
 import android.widget.EditText
 import android.widget.Toast
 import com.claseoct.zeligstore.APISpring.UsersAPI
 import com.claseoct.zeligstore.APISpring.ZapatosAPI
-import com.claseoct.zeligstore.Models.UsersClass
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import java.lang.StringBuilder
-import java.time.Duration
-import kotlin.system.exitProcess
 
 class LoginActivity : AppCompatActivity() {
 
     //Preparando las variables
     private lateinit var etUser:EditText
     private lateinit var etPassword: EditText
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -98,6 +96,8 @@ class LoginActivity : AppCompatActivity() {
 
                         runOnUiThread{
                             if(call_type.isSuccessful){
+
+
                                 if(respuesta_type != null){
                                     for (i in respuesta_type){
                                         //Acá es dónde validamos con los datos, si el usuario es administrador(1) o usuario corriente(0)
@@ -105,13 +105,16 @@ class LoginActivity : AppCompatActivity() {
                                             println("${i.nombre}, tú eres administrador del sistema.")
                                             MostrarTipoUsuario(user, pass)
                                             nextActivityMenu()
+                                            finish()
                                         }
                                         else if(i.tipousuario==0){
                                             println("${i.nombre}, tú eres un usuario corriente.")
                                             MostrarTipoUsuario(user, pass)
                                             nextActivityMenu()
+                                            finish()
                                         }
                                         else if(i.tipousuario==null){
+
                                             println("Ha ocurrido un error inesperado!!")
                                         }
                                     }
@@ -130,7 +133,6 @@ class LoginActivity : AppCompatActivity() {
 
     //Funcion para evaluar si hay registro de credenciales
     fun evalCredentials(view: View){
-
         var user = etUser.text.toString()
         var pass = etPassword.text.toString()
 
@@ -138,11 +140,13 @@ class LoginActivity : AppCompatActivity() {
             Toast.makeText(this, "¡Por favor, completa todos los campos!", Toast.LENGTH_SHORT).show()
         }
         else{
+
             try {
+
+
                 LogearTo(user, pass)
-                etUser.text = null
-                etPassword.text = null
             }catch (e:Exception){
+
                 Toast.makeText(this, "¡Error al establecer la Conexión!", Toast.LENGTH_SHORT).show()
             }
         }
@@ -154,6 +158,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     fun getMessageFailed(){
+
         Toast.makeText(this, "¡Usuario no encontrado, \nVerifica que hayas escrito bien tus credenciales!", Toast.LENGTH_LONG).show()
     }
 
@@ -162,5 +167,7 @@ class LoginActivity : AppCompatActivity() {
     fun onLoginClick(view: View?) {
         startActivity(Intent(this,NewUserActivity::class.java))
         overridePendingTransition(R.anim.slide_in_left,android.R.anim.slide_out_right);
+
     }
+
 }

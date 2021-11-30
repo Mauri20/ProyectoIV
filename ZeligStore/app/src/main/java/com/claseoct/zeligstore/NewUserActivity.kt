@@ -138,6 +138,7 @@ class NewUserActivity : AppCompatActivity() {
                                                         //===============================================================================
                                                         getMessageSuccesfully()
                                                         getRedirectLoginActivity()
+                                                        finish()
                                                     }
                                                     else{
                                                         getMessageFailedPin()
@@ -160,6 +161,7 @@ class NewUserActivity : AppCompatActivity() {
                                             //===============================================================================
                                             getMessageSuccesfully()
                                             getRedirectLoginActivity()
+                                            finish()
                                         }
                                     }
                                 }
@@ -185,5 +187,12 @@ class NewUserActivity : AppCompatActivity() {
     fun onLoginClick(view: View?) {
         startActivity(Intent(this,LoginActivity::class.java))
         overridePendingTransition(R.anim.slide_in_right,android.R.anim.slide_out_right);
+    }
+    override fun onBackPressed()
+    {
+        super.onBackPressed()
+        val returnIntent = Intent(this, LoginActivity::class.java)
+        startActivity(returnIntent)
+        finish()
     }
 }

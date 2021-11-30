@@ -35,37 +35,44 @@ class MenuActivity : AppCompatActivity() {
                 Toast.makeText(this, "Has seleccionado PUMA", Toast.LENGTH_SHORT).show()
                 startActivity(Intent(this,PumaActivity::class.java))
                 overridePendingTransition(R.anim.slide_in_right,android.R.anim.slide_out_right);
+                finish()
             }
             R.id.imgBtn_adidas ->
             {
                 Toast.makeText(this, "Has seleccionado ADIDAS", Toast.LENGTH_SHORT).show()
                 startActivity(Intent(this,AdidasActivity::class.java))
                 overridePendingTransition(R.anim.slide_in_right,android.R.anim.slide_out_right);
+                finish()
             }
             R.id.imgBtn_converse ->
             {
                 Toast.makeText(this, "Has seleccionado CONVERSE", Toast.LENGTH_SHORT).show()
                 startActivity(Intent(this,ConverseActivity::class.java))
                 overridePendingTransition(R.anim.slide_in_right,android.R.anim.slide_out_right);
+                finish()
             }
             R.id.imgBtn_nike ->
             {
                 Toast.makeText(this, "Has seleccionado NIKE", Toast.LENGTH_SHORT).show()
                 startActivity(Intent(this,NikeActivity::class.java))
                 overridePendingTransition(R.anim.slide_in_right,android.R.anim.slide_out_right);
+                finish()
             }
             R.id.imgBtn_reebok ->
             {
                 Toast.makeText(this, "Has seleccionado REEBOK", Toast.LENGTH_SHORT).show()
                 startActivity(Intent(this,ReebokActivity::class.java))
                 overridePendingTransition(R.anim.slide_in_right,android.R.anim.slide_out_right);
+                finish()
             }
             R.id.imgBtn_vans ->
             {
                 Toast.makeText(this, "Has seleccionado VANS", Toast.LENGTH_SHORT).show()
                 startActivity(Intent(this,VansActivity::class.java))
                 overridePendingTransition(R.anim.slide_in_right,android.R.anim.slide_out_right);
+                finish()
             }
         }
     }
+
 }
