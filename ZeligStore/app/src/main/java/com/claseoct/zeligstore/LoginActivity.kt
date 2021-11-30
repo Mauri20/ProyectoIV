@@ -30,6 +30,7 @@ class LoginActivity : AppCompatActivity() {
         //Asignando los componentes a las variables
         etUser=findViewById(R.id.et_User)
         etPassword=findViewById(R.id.et_Password)
+<<<<<<< Updated upstream
 
         cargar = KProgressHUD.create(this)
             .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
@@ -38,6 +39,9 @@ class LoginActivity : AppCompatActivity() {
             .setCancellable(false)
             .setAnimationSpeed(2)
             .setDimAmount(0.5f)
+=======
+        Mostrar()
+>>>>>>> Stashed changes
     }
 
 

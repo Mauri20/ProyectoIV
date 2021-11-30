@@ -3,6 +3,8 @@ package com.zeligstoreoficial.ZeligStoreOficial.Controllers;
 import com.zeligstoreoficial.ZeligStoreOficial.Entities.usuariosEntitie;
 import com.zeligstoreoficial.ZeligStoreOficial.Entities.*;
 import com.zeligstoreoficial.ZeligStoreOficial.Repositories.zapatosInterface;
+import com.zeligstoreoficial.ZeligStoreOficial.ResponseClass.ZapatoResponse;
+import javassist.bytecode.ByteArray;
 import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -57,23 +59,30 @@ public class zapatosController {
 
         return new ResponseEntity(listaByCategoria, HttpStatus.OK);
     }
-    @PostMapping("/saveZapato/{talla}/{color}/{precio}/{url}/{idCategoria}/{idModelo}/{idEstilo}")
-    public ResponseEntity<?> sp_guardarZapato(
-            @PathVariable("talla")Double talla,
-            @PathVariable("color")String color,
-            @PathVariable("precio")Double precio,
-            @PathVariable("url")String url,
-            @PathVariable("idCategoria")Integer idCategoria,
-            @PathVariable("idModelo")Integer idModelo,
-            @PathVariable("idEstilo")Integer idEstilo
-    ){
+    @PostMapping("/saveZapato")
+    public boolean sp_guardarZapato(@RequestBody ZapatoResponse zapato){
+        boolean resultado=false;
+        String urlFoto;
+        StringBuilder builder = new StringBuilder();
+        builder.append("src//main//resources//static/images/");
+        builder.append(zapato.getModelo()+ ".jpg");
+        urlFoto=builder.toString();
+        byte[] fileBytes = zapato.getFoto();
+        Path path = Paths.get(builder.toString());
         try {
-            Integer result=zapatosRepository.sp_i_Zapatos(talla,color,precio,url,idCategoria,idModelo,idEstilo);
-            return new ResponseEntity("He devuelto"+result,HttpStatus.CREATED);
-        }catch (Exception e){
-            return new ResponseEntity("Hay una Excepcion pero siempre registra.",HttpStatus.CREATED);
+            Files.write(path, fileBytes);
+        }catch (IOException e){
+            System.out.println("Error al escribir"+e);
         }
-
+        try {
+            zapatosRepository.sp_i_Zapatos(zapato.getModelo(), zapato.getTalla(), zapato.getColor(),zapato.getPrecio(),urlFoto,zapato.getIdCategoria(),zapato.getIdMarca(),zapato.getIdEstilo());
+            resultado=true;
+            System.out.println("Funciona D1");
+        }catch (Exception e){
+            resultado=false;
+            System.out.println("Error>>>"+e);
+        }
+        return resultado;
     }
 
 }

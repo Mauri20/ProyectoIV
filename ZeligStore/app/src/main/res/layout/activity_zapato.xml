@@ -57,16 +57,18 @@
                         android:orientation="horizontal"
                         android:gravity="center"
                         android:layout_height="wrap_content">
+
                         <Button
                             android:id="@+id/btnImage"
-                            android:backgroundTint="#216DA8"
-
-                            android:textColor="@color/white"
-                            app:cornerRadius="15dp"
                             android:layout_width="wrap_content"
+
                             android:layout_height="wrap_content"
                             android:layout_margin="10dp"
-                            android:text="Seleccionar \nImagen"/>
+                            android:backgroundTint="#216DA8"
+                            android:onClick="cargarImagen"
+                            android:text="Seleccionar \nImagen"
+                            android:textColor="@color/white"
+                            app:cornerRadius="15dp" />
 
                         <ImageView
                             android:id="@+id/imageZapato"
@@ -75,6 +77,20 @@
                             android:layout_margin="10dp"
                             android:layout_height="130dp"/>
                     </androidx.appcompat.widget.LinearLayoutCompat>
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/textInputModelo"
+                        style="@style/parent"
+                        android:layout_marginTop="@dimen/loginViewsMargin">
+
+                        <EditText
+                            android:id="@+id/et_Modelo"
+                            style="@style/modifiedEditText"
+                            android:hint="Modelo"
+                            android:inputType="text"
+                            android:maxLines="1"
+                            android:textSize="8pt" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/textInputName"
                         style="@style/parent"
@@ -145,7 +161,7 @@
 
                     </com.google.android.material.textfield.TextInputLayout>
                     <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/textInputModelo"
+                        android:id="@+id/textInputMarca"
                         style="@style/parent"
                         android:layout_marginTop="@dimen/loginViewsMargin">
                         <Spinner
@@ -161,14 +177,14 @@
                     <Button
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:gravity="center"
                         android:layout_gravity="center"
-                        android:text="Guardar"
                         android:layout_marginTop="10dp"
                         android:backgroundTint="#1D9C78"
-                        app:cornerRadius="15dp"
+                        android:gravity="center"
+                        android:onClick="saveShoes"
+                        android:text="Guardar"
                         android:textColor="@color/white"
-                        />
+                        app:cornerRadius="15dp" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
