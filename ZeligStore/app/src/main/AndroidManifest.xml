@@ -22,23 +22,28 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".VansActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".ReebokActivity"
             android:exported="true"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".NikeActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".ConverseActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".AdidasActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".PumaActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".MenuActivity"
             android:exported="false"

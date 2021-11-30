@@ -31,14 +31,14 @@ class ReebokActivity : AppCompatActivity() {
     private val listaZapatos= mutableListOf<ZapatosClass>()
 
     var marca="Reebook"
-    var categoria="Seleccione"
+    var categoria="Todos"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_reebok)
         spinner=findViewById(R.id.sp_Catego)
         recycler=findViewById(R.id.cv_reebook)
 
-        val categorias= arrayOf("Seleccione","Mujer","Hombre","Niña","Niño")
+        val categorias= arrayOf("Todos","Mujer","Hombre","Niña","Niño")
         val adapter=ArrayAdapter(this,android.R.layout.simple_spinner_item,categorias)
         spinner.adapter=adapter
         onClickItem()
@@ -69,7 +69,7 @@ class ReebokActivity : AppCompatActivity() {
                 }else if(position==4){
                     categoria="Niño"
                 }else{
-                    categoria="Seleccione"
+                    categoria="Todos"
                 }
                 mostrarZapatos(marca,categoria)
             }
@@ -89,7 +89,7 @@ class ReebokActivity : AppCompatActivity() {
     private fun mostrarZapatos(marca:String,categoria:String){
         CoroutineScope(Dispatchers.IO).launch {
 
-            if(categoria.equals("Seleccione")){
+            if(categoria.equals("Todos")){
                 call = getRetrofit().create(ZapatosAPI::class.java).showAllShoes2("showAllZapatos/$marca")
             }else{
                 call = getRetrofit().create(ZapatosAPI::class.java).showAllShoes2("showAllZapatosByCategory/$categoria/$marca")
