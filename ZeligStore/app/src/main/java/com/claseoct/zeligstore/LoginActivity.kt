@@ -1,7 +1,7 @@
 package com.claseoct.zeligstore
 
 
-import android.app.Dialog
+import android.app.AlertDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -10,6 +10,7 @@ import android.widget.EditText
 import android.widget.Toast
 import com.claseoct.zeligstore.APISpring.UsersAPI
 import com.claseoct.zeligstore.APISpring.ZapatosAPI
+import com.kaopiz.kprogresshud.KProgressHUD
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -21,7 +22,7 @@ class LoginActivity : AppCompatActivity() {
     //Preparando las variables
     private lateinit var etUser:EditText
     private lateinit var etPassword: EditText
-
+    private lateinit var cargar : KProgressHUD
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,6 +30,14 @@ class LoginActivity : AppCompatActivity() {
         //Asignando los componentes a las variables
         etUser=findViewById(R.id.et_User)
         etPassword=findViewById(R.id.et_Password)
+
+        cargar = KProgressHUD.create(this)
+            .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
+            .setLabel("Por favor espera")
+            .setDetailsLabel("Verificando usuario")
+            .setCancellable(false)
+            .setAnimationSpeed(2)
+            .setDimAmount(0.5f)
     }
 
 
@@ -131,6 +140,7 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
+
     //Funcion para evaluar si hay registro de credenciales
     fun evalCredentials(view: View){
         var user = etUser.text.toString()
@@ -141,9 +151,8 @@ class LoginActivity : AppCompatActivity() {
         }
         else{
 
+            cargar.show()
             try {
-
-
                 LogearTo(user, pass)
             }catch (e:Exception){
 
@@ -158,7 +167,10 @@ class LoginActivity : AppCompatActivity() {
     }
 
     fun getMessageFailed(){
-
+        cargar.dismiss()
+        etUser.isFocusable
+        etUser.setText("")
+        etPassword.setText("")
         Toast.makeText(this, "¡Usuario no encontrado, \nVerifica que hayas escrito bien tus credenciales!", Toast.LENGTH_LONG).show()
     }
 
