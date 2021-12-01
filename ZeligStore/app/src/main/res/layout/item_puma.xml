@@ -14,7 +14,7 @@
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="290dp"
+            android:layout_height="470dp"
             android:layout_gravity="fill"
             app:cardCornerRadius="18dp"
             android:background="@color/white"
@@ -22,77 +22,73 @@
             android:padding="5dp"
             android:outlineSpotShadowColor="@color/purple_200"
             app:cardUseCompatPadding="true">
-            <TextView
-                android:id="@+id/tv_Modelo"
-                android:layout_width="match_parent"
-                android:layout_height="25dp"
-                android:textSize="20sp"
-                android:gravity="center"
-                android:text="Modelo"
-                android:fontFamily="sans-serif-condensed"
-                android:textStyle="bold"
-                android:layout_marginTop="10dp"/>
+
+
+
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="430dp"
                 android:layout_gravity="center_vertical"
-                android:gravity="center"
-                android:padding="10dp"
                 android:layout_margin="10dp"
-                android:orientation="horizontal" >
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="15dp">
 
+                <TextView
+                    android:id="@+id/tv_Modelo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="sans-serif-condensed"
+                    android:gravity="center"
+                    android:text="Modelo"
+                    android:textSize="22sp"
+                    android:textStyle="bold" />
                 <ImageView
                     android:id="@+id/ivItemPuma"
-                    android:layout_marginTop="15dp"
                     android:layout_width="200dp"
-                    android:layout_height="200dp" />
+                    android:layout_height="200dp"
+                    android:layout_marginTop="15dp" />
 
-                <LinearLayout
-                    android:layout_width="100dp"
-                    android:layout_marginTop="15dp"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:gravity="fill"
-                    android:layout_marginLeft="10dp"
-                    android:padding="10dp"
-                    >
-                    <TextView
-                        android:id="@+id/tv_Talla"
-                        android:layout_width="match_parent"
-                        android:layout_height="25dp"
-                        android:textSize="20sp"
-                        android:text="Talla"
-                        android:fontFamily="sans-serif-condensed"
-                        android:textStyle="bold"
-                        android:layout_marginTop="10dp"/>
-                    <TextView
-                        android:id="@+id/tv_Estilo"
-                        android:layout_width="match_parent"
-                        android:layout_height="25dp"
-                        android:textSize="20sp"
-                        android:text="Estilo"
-                        android:fontFamily="sans-serif-condensed"
-                        android:textStyle="bold"
-                        android:layout_marginTop="10dp"/>
-                    <TextView
-                        android:id="@+id/tv_Precio"
-                        android:layout_width="match_parent"
-                        android:layout_height="25dp"
-                        android:textSize="20sp"
-                        android:text="Precio"
-                        android:fontFamily="sans-serif-condensed"
-                        android:textStyle="bold"
-                        android:layout_marginTop="10dp"/>
-                    <TextView
-                        android:id="@+id/tv_Color"
-                        android:layout_width="match_parent"
-                        android:layout_height="25dp"
-                        android:textSize="20sp"
-                        android:text="Color"
-                        android:fontFamily="sans-serif-condensed"
-                        android:textStyle="bold"
-                        android:layout_marginTop="10dp"/>
-                </LinearLayout>
+                <TextView
+                    android:id="@+id/tv_Talla"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="sans-serif-condensed"
+                    android:text="Talla"
+                    android:textSize="22sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_Estilo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="sans-serif-condensed"
+                    android:text="Estilo"
+                    android:textSize="22sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_Precio"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="sans-serif-condensed"
+                    android:text="Precio"
+                    android:textSize="22sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_Color"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="sans-serif-condensed"
+                    android:text="Color"
+                    android:textSize="22sp"
+                    android:textStyle="bold" />
             </LinearLayout>
 
 
