@@ -300,7 +300,12 @@ class ZapatoActivity : AppCompatActivity() {
 
     }
 
-
-
+    override fun onBackPressed()
+    {
+        super.onBackPressed()
+        val returnIntent = Intent(this, MenuActivity::class.java)
+        startActivity(returnIntent)
+        finish()
+    }
 
 }

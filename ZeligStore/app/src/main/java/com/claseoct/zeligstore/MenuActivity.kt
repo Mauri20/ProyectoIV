@@ -27,6 +27,7 @@ class MenuActivity : AppCompatActivity() {
         if (status!=0){
             startActivity(Intent(this,ZapatoActivity::class.java))
             overridePendingTransition(R.anim.slide_in_right,android.R.anim.slide_out_right);
+            finish()
         }else{
             Toast.makeText(this, "¡Esta opción es solo para administradores!", Toast.LENGTH_SHORT).show()
         }

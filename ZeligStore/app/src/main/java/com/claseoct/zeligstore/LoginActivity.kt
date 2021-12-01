@@ -107,6 +107,7 @@ class LoginActivity : AppCompatActivity() {
             runOnUiThread{
                 if(call.isSuccessful){
                     if(respuesta == true){
+                        cargar.dismiss()
                         println("=========> Bienvenido")
 
                         runOnUiThread{
