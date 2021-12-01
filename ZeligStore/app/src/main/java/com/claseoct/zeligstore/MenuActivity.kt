@@ -1,5 +1,6 @@
 package com.claseoct.zeligstore
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -9,13 +10,17 @@ import android.widget.Toast
 
 class MenuActivity : AppCompatActivity() {
     private lateinit var addShoes:ImageView
-    var IDACTIVO=1
+    var TYPEUSER=0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_menu)
         addShoes=findViewById(R.id.addzapato)
         addShoes.setOnClickListener{
-            newZapato(IDACTIVO)
+            var preferences=getSharedPreferences("tipoUser", Context.MODE_PRIVATE)
+            var tipo=preferences.getString("tipo","0")
+            println(tipo)
+            TYPEUSER=tipo!!.toInt()
+            newZapato(TYPEUSER)
         }
     }
     fun newZapato(status:Int){

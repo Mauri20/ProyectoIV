@@ -2,6 +2,7 @@ package com.claseoct.zeligstore
 
 
 import android.app.AlertDialog
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -16,9 +17,14 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import android.content.SharedPreferences
+
+
+
 
 class LoginActivity : AppCompatActivity() {
-
+    //Variables para SharedPreferences
+    lateinit var userType:String
     //Preparando las variables
     private lateinit var etUser:EditText
     private lateinit var etPassword: EditText
@@ -105,19 +111,19 @@ class LoginActivity : AppCompatActivity() {
 
                         runOnUiThread{
                             if(call_type.isSuccessful){
-
-
                                 if(respuesta_type != null){
                                     for (i in respuesta_type){
                                         //Acá es dónde validamos con los datos, si el usuario es administrador(1) o usuario corriente(0)
                                         if(i.tipousuario==1){
                                             println("${i.nombre}, tú eres administrador del sistema.")
+                                            savePreferences(i.tipousuario.toString())
                                             MostrarTipoUsuario(user, pass)
                                             nextActivityMenu()
                                             finish()
                                         }
                                         else if(i.tipousuario==0){
                                             println("${i.nombre}, tú eres un usuario corriente.")
+                                            savePreferences(i.tipousuario.toString())
                                             MostrarTipoUsuario(user, pass)
                                             nextActivityMenu()
                                             finish()
@@ -160,7 +166,12 @@ class LoginActivity : AppCompatActivity() {
             }
         }
     }
-
+    fun savePreferences(userType:String){
+        var preferences=getSharedPreferences("tipoUser", Context.MODE_PRIVATE)
+        preferences.edit().clear().commit()
+        var preferences2=getSharedPreferences("tipoUser", Context.MODE_PRIVATE)
+        preferences2.edit().putString("tipo",userType).commit()
+    }
     fun nextActivityMenu(){
         startActivity(Intent(this,MenuActivity::class.java))
         overridePendingTransition(R.anim.slide_in_right,android.R.anim.slide_out_right);
