@@ -10,7 +10,6 @@ import android.widget.Spinner
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.claseoct.zeligstore.APISpring.ZapatosAPI
-import com.claseoct.zeligstore.Adapters.ReebookAdapter
 import com.claseoct.zeligstore.Adapters.VansAdapter
 import com.claseoct.zeligstore.Models.ZapatosClass
 import kotlinx.coroutines.CoroutineScope
@@ -37,7 +36,7 @@ class VansActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_vans)
         spinner=findViewById(R.id.sp_Catego)
-        recycler=findViewById(R.id.cv_vans)
+        recycler=findViewById(R.id.cv_Adidas)
 
         val categorias= arrayOf("Todos","Mujer","Hombre","Niña","Niño")
         val adapter= ArrayAdapter(this,android.R.layout.simple_spinner_item,categorias)
