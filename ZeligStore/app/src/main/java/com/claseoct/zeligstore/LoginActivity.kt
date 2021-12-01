@@ -107,7 +107,6 @@ class LoginActivity : AppCompatActivity() {
             runOnUiThread{
                 if(call.isSuccessful){
                     if(respuesta == true){
-                        cargar.dismiss()
                         println("=========> Bienvenido")
 
                         runOnUiThread{
@@ -120,14 +119,15 @@ class LoginActivity : AppCompatActivity() {
                                             savePreferences(i.tipousuario.toString())
                                             MostrarTipoUsuario(user, pass)
                                             nextActivityMenu()
-                                            finish()
+
+
                                         }
                                         else if(i.tipousuario==0){
                                             println("${i.nombre}, tú eres un usuario corriente.")
                                             savePreferences(i.tipousuario.toString())
                                             MostrarTipoUsuario(user, pass)
                                             nextActivityMenu()
-                                            finish()
+
                                         }
                                         else if(i.tipousuario==null){
 
@@ -137,6 +137,8 @@ class LoginActivity : AppCompatActivity() {
                                 }
                             }
                         }
+                        cargar.dismiss()
+                        finish()
                     }
                     else if(respuesta == false){
                         println("=========> Not FOUND")
@@ -179,7 +181,7 @@ class LoginActivity : AppCompatActivity() {
 
     fun getMessageFailed(){
         cargar.dismiss()
-        etUser.isFocusable
+        etUser.requestFocus()
         etUser.setText("")
         etPassword.setText("")
         Toast.makeText(this, "¡Usuario no encontrado, \nVerifica que hayas escrito bien tus credenciales!", Toast.LENGTH_LONG).show()
@@ -190,6 +192,10 @@ class LoginActivity : AppCompatActivity() {
     fun onLoginClick(view: View?) {
         startActivity(Intent(this,NewUserActivity::class.java))
         overridePendingTransition(R.anim.slide_in_left,android.R.anim.slide_out_right);
+
+    }
+
+    fun verificarTipoUser(){
 
     }
 
