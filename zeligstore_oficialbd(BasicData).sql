@@ -52,7 +52,7 @@ CREATE TABLE `estilos` (
   `idEstilo` int NOT NULL AUTO_INCREMENT,
   `nombreEst` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`idEstilo`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -61,7 +61,7 @@ CREATE TABLE `estilos` (
 
 LOCK TABLES `estilos` WRITE;
 /*!40000 ALTER TABLE `estilos` DISABLE KEYS */;
-INSERT INTO `estilos` VALUES (1,'Jordan'),(2,'Running'),(3,'Basketball'),(4,'Football'),(5,'Soccer'),(6,'Training & Gym\n'),(7,'Skateboarding'),(8,'Baseball'),(9,'Golf'),(10,'Tennis'),(11,'Walking'),(12,'Track & Field\n'),(13,'Sandals & Slides');
+INSERT INTO `estilos` VALUES (1,'Running'),(2,'Basketball'),(3,'Football'),(4,'Soccer'),(5,'Training & Gym'),(6,'Skateboarding'),(7,'Baseball'),(8,'Golf'),(9,'Tennis'),(10,'Walking'),(11,'Track & Field'),(12,'Sandals & Slides');
 /*!40000 ALTER TABLE `estilos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -103,7 +103,7 @@ CREATE TABLE `modelos` (
   PRIMARY KEY (`idModelo`),
   KEY `fk_modelo_marca` (`idMarca`),
   CONSTRAINT `fk_modelo_marca` FOREIGN KEY (`idMarca`) REFERENCES `marcas` (`idMarca`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE=InnoDB AUTO_INCREMENT=48 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -112,7 +112,6 @@ CREATE TABLE `modelos` (
 
 LOCK TABLES `modelos` WRITE;
 /*!40000 ALTER TABLE `modelos` DISABLE KEYS */;
-INSERT INTO `modelos` VALUES (32,'R-Junior',5),(33,'R-Deportive',5),(34,'RM-Soldiers',5),(35,'RW-Champions',5),(36,'R-Stars',5),(37,'R-Astronauts',5),(38,'RM-Galaxy',5),(39,'RW-Naturals',5),(40,'V-MagicPink',6),(41,'VM-FancyBlue',6),(42,'VW-Roustic',6),(43,'V-Intense',6),(44,'V-Flowers',6),(45,'V-WarmRed',6),(46,'VW-TruckPink',6),(47,'RM-CasualShoes',6);
 /*!40000 ALTER TABLE `modelos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -131,7 +130,7 @@ CREATE TABLE `usuarios` (
   `contrasena` varchar(50) DEFAULT NULL,
   `tipousuario` int DEFAULT NULL,
   PRIMARY KEY (`idUsuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -140,7 +139,6 @@ CREATE TABLE `usuarios` (
 
 LOCK TABLES `usuarios` WRITE;
 /*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
-INSERT INTO `usuarios` VALUES (1,'Andres Eduardo','79677324','cordova','1234',1),(6,'Mauricio Rosa','7878-6531','mauri','1234',0),(15,'Jasmin Robles','1234-1234','Jas','1234',1);
 /*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -167,7 +165,7 @@ CREATE TABLE `zapatos` (
   CONSTRAINT `fk_zapatos_modelo` FOREIGN KEY (`idModelo`) REFERENCES `modelos` (`idModelo`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `id_zapatos_categorias` FOREIGN KEY (`idCategoria`) REFERENCES `categorias` (`idCategoria`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `id_zapatos_estilo` FOREIGN KEY (`idEstilo`) REFERENCES `estilos` (`idEstilo`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE=InnoDB AUTO_INCREMENT=63 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -176,7 +174,6 @@ CREATE TABLE `zapatos` (
 
 LOCK TABLES `zapatos` WRITE;
 /*!40000 ALTER TABLE `zapatos` DISABLE KEYS */;
-INSERT INTO `zapatos` VALUES (47,5.00,'Amarillo',45.78,'src//main//resources//static/images/R-Junior.jpg',4,32,10),(48,4.00,'Rosado',30.99,'src//main//resources//static/images/R-Deportive.jpg',2,33,10),(49,9.00,'Multi-Color',89.99,'src//main//resources//static/images/RM-Soldiers.jpg',3,34,6),(50,7.00,'Salmón',67.99,'src//main//resources//static/images/RW-Champions.jpg',1,35,2),(51,5.00,'Blanco',67.88,'src//main//resources//static/images/R-Stars.jpg',2,36,12),(52,6.00,'Gris',90.99,'src//main//resources//static/images/R-Astronauts.jpg',4,37,4),(53,8.00,'Negro',100.00,'src//main//resources//static/images/RM-Galaxy.jpg',3,38,12),(54,9.00,'Rosado',99.99,'src//main//resources//static/images/RW-Naturals.jpg',1,39,11),(55,7.00,'Rosado',99.78,'src//main//resources//static/images/V-MagicPink.jpg',2,40,12),(56,9.60,'Azul',120.00,'src//main//resources//static/images/VM-FancyBlue.jpg',3,41,12),(57,7.00,'MultiColor',119.99,'src//main//resources//static/images/VW-Roustic.jpg',1,42,10),(58,5.00,'Negro',78.88,'src//main//resources//static/images/V-Intense.jpg',4,43,4),(59,7.00,'Varios',56.14,'src//main//resources//static/images/V-Flowers.jpg',2,44,2),(60,6.00,'Rojo',45.89,'src//main//resources//static/images/V-WarmRed.jpg',4,45,11),(61,8.00,'Rosado',126.90,'src//main//resources//static/images/VW-TruckPink.jpg',1,46,2),(62,9.00,'Gris',100.00,'src//main//resources//static/images/RM-CasualShoes.jpg',3,47,9);
 /*!40000 ALTER TABLE `zapatos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -408,4 +405,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-11-30 23:09:44
+-- Dump completed on 2021-12-01 15:22:31

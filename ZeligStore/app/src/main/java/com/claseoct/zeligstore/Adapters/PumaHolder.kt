@@ -17,8 +17,8 @@ class PumaHolder (view: View): RecyclerView.ViewHolder(view)  {
         binding.ivItemPuma.setImageBitmap(bitMap)
         binding.tvModelo.setText(zapato.idmodelo.nombremod)
         binding.tvTalla.setText("Talla: " + zapato.talla.toString())
-        binding.tvEstilo.setText(zapato.idestilo.nombreest)
-        binding.tvPrecio.setText("$"+zapato.precio.toString())
-        binding.tvColor.setText(zapato.color)
+        binding.tvEstilo.setText("Estilo: "+zapato.idestilo.nombreest)
+        binding.tvPrecio.setText("Precio: $"+zapato.precio.toString())
+        binding.tvColor.setText("Disponible en: " + zapato.color)
     }
 }
