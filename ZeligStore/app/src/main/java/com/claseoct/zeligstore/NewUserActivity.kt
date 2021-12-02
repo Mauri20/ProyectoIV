@@ -89,6 +89,10 @@ class NewUserActivity : AppCompatActivity() {
         startActivity(inten)
     }
 
+    fun proximamente(view: View){
+        Toast.makeText(this, "¡Función disponible próximamente!", Toast.LENGTH_SHORT).show()
+    }
+
     //Funcion para guardar
     fun saveUser(view: View?){
         //variables contenedoras del texto de los campos

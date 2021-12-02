@@ -187,15 +187,15 @@ class LoginActivity : AppCompatActivity() {
         Toast.makeText(this, "¡Usuario no encontrado, \nVerifica que hayas escrito bien tus credenciales!", Toast.LENGTH_LONG).show()
     }
 
+    fun proximamente(view: View){
+        Toast.makeText(this, "¡Función disponible próximamente!", Toast.LENGTH_SHORT).show()
+    }
+
 
     //Funcion para ir al Registro
     fun onLoginClick(view: View?) {
         startActivity(Intent(this,NewUserActivity::class.java))
         overridePendingTransition(R.anim.slide_in_left,android.R.anim.slide_out_right);
-
-    }
-
-    fun verificarTipoUser(){
 
     }
 
