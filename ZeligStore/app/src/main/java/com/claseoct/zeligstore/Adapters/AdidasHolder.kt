@@ -18,6 +18,6 @@ class AdidasHolder(view:View): RecyclerView.ViewHolder(view) {
         binding.tvTalla.setText("Talla: " + zapato.talla.toString())
         binding.tvEstilo.setText("Estilo: "+zapato.idestilo.nombreest)
         binding.tvPrecio.setText("Precio: $"+zapato.precio.toString())
-        binding.tvColor.setText("Disponible en: " + zapato.color)
+        binding.tvColor.setText("Color: " + zapato.color)
     }
 }
