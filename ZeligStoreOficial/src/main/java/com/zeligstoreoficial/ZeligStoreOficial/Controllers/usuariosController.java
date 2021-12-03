@@ -15,6 +15,7 @@ import java.util.List;
 public class usuariosController {
 
     @Autowired
+    //Inyeccion de consultas
     private usuariosInterface userRepository;
 
     //=========== Funcion para Mostrar Todos los Usuario ==========

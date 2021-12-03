@@ -36,6 +36,7 @@ class LoginActivity : AppCompatActivity() {
         //Asignando los componentes a las variables
         etUser=findViewById(R.id.et_User)
         etPassword=findViewById(R.id.et_Password)
+
         cargar = KProgressHUD.create(this)
             .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
             .setLabel("Por favor espera")
@@ -56,96 +57,112 @@ class LoginActivity : AppCompatActivity() {
             .build()
     }
 
+    //Metodo solo para pruebas de conexion
     private fun Mostrar(){
-        CoroutineScope(Dispatchers.IO).launch {
-            val call = getRetrofit().create(ZapatosAPI::class.java).showAllShoes2("Zapatos/showAllZapatos/Reebook")
-            val respuesta = call.body()?: emptyList()
+        try {
+            CoroutineScope(Dispatchers.IO).launch {
+                val call = getRetrofit().create(ZapatosAPI::class.java).showAllShoes2("Zapatos/showAllZapatos/Reebook")
+                val respuesta = call.body()?: emptyList()
 
-            runOnUiThread{
-                if(call.isSuccessful){
-                    for(i in respuesta){
-                        println("Modelo: " + i.idmodelo.nombremod)
-                        println("Marca: " + i.idmodelo.idmarca.nombremar)
-                        println("Precio: " + i.precio)
-                        println("Talla: " + i.talla)
-                        println("-------------------")
+                runOnUiThread{
+                    if(call.isSuccessful){
+                        for(i in respuesta){
+                            println("Modelo: " + i.idmodelo.nombremod)
+                            println("Marca: " + i.idmodelo.idmarca.nombremar)
+                            println("Precio: " + i.precio)
+                            println("Talla: " + i.talla)
+                            println("-------------------")
+                        }
+                    }
+                    else{
+                        println("Error al traer los datos")
                     }
                 }
-                else{
-                    println("Error al traer los datos")
-                }
             }
+        }
+        catch (e:Exception){
+            Toast.makeText(this, "¡Error interno del servidor!", Toast.LENGTH_SHORT).show()
         }
     }
 
     private fun MostrarTipoUsuario(User:String, Pass:String){
-        CoroutineScope(Dispatchers.IO).launch {
-            val call = getRetrofit().create(UsersAPI::class.java).returnTypeUser(User, Pass)
-            val respuesta = call.body()
+        try {
+            CoroutineScope(Dispatchers.IO).launch {
+                val call = getRetrofit().create(UsersAPI::class.java).returnTypeUser(User, Pass)
+                val respuesta = call.body()
 
-            runOnUiThread{
-                if(call.isSuccessful){
-                    if (respuesta != null) {
-                        for (i in respuesta){
-                            println("=> Nombre de Usuario: " + i.usuario)
-                            println("=> Tipo Usuario: " + i.tipousuario)
+                runOnUiThread{
+                    if(call.isSuccessful){
+                        if (respuesta != null) {
+                            for (i in respuesta){
+                                println("=> Nombre de Usuario: " + i.usuario)
+                                println("=> Tipo Usuario: " + i.tipousuario)
+                            }
                         }
                     }
                 }
             }
         }
+        catch (e:Exception){
+            Toast.makeText(this, "¡Error interno del servidor!", Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun LogearTo(user:String, pass:String){
+        try {
+            CoroutineScope(Dispatchers.IO).launch {
+                val call = getRetrofit().create(UsersAPI::class.java).loginUser(user, pass)
+                val call_type = getRetrofit().create(UsersAPI::class.java).returnTypeUser(user, pass)
+                val respuesta = call.body()
+                val respuesta_type = call_type.body()
 
-        CoroutineScope(Dispatchers.IO).launch {
-            val call = getRetrofit().create(UsersAPI::class.java).loginUser(user, pass)
-            val call_type = getRetrofit().create(UsersAPI::class.java).returnTypeUser(user, pass)
-            val respuesta = call.body()
-            val respuesta_type = call_type.body()
+                runOnUiThread{
+                    if(call.isSuccessful){
+                        if(respuesta == true){
+                            println("=========> Bienvenido")
 
-            runOnUiThread{
-                if(call.isSuccessful){
-                    if(respuesta == true){
-                        println("=========> Bienvenido")
-
-                        runOnUiThread{
-                            if(call_type.isSuccessful){
-                                if(respuesta_type != null){
-                                    for (i in respuesta_type){
-                                        //Acá es dónde validamos con los datos, si el usuario es administrador(1) o usuario corriente(0)
-                                        if(i.tipousuario==1){
-                                            println("${i.nombre}, tú eres administrador del sistema.")
-                                            savePreferences(i.tipousuario.toString())
-                                            MostrarTipoUsuario(user, pass)
-                                            nextActivityMenu()
+                            //Regresa al hilo anterior
+                            runOnUiThread{
+                                if(call_type.isSuccessful){
+                                    if(respuesta_type != null){
+                                        for (i in respuesta_type){
+                                            //Acá es dónde validamos con los datos, si el usuario es administrador(1) o usuario corriente(0)
+                                            if(i.tipousuario==1){
+                                                println("${i.nombre}, tú eres administrador del sistema.")
+                                                savePreferences(i.tipousuario.toString())
+                                                MostrarTipoUsuario(user, pass)
+                                                nextActivityMenu()
 
 
-                                        }
-                                        else if(i.tipousuario==0){
-                                            println("${i.nombre}, tú eres un usuario corriente.")
-                                            savePreferences(i.tipousuario.toString())
-                                            MostrarTipoUsuario(user, pass)
-                                            nextActivityMenu()
+                                            }
+                                            else if(i.tipousuario==0){
+                                                println("${i.nombre}, tú eres un usuario corriente.")
+                                                savePreferences(i.tipousuario.toString())
+                                                MostrarTipoUsuario(user, pass)
+                                                nextActivityMenu()
 
-                                        }
-                                        else if(i.tipousuario==null){
+                                            }
+                                            else if(i.tipousuario==null){
 
-                                            println("Ha ocurrido un error inesperado!!")
+                                                println("Ha ocurrido un error inesperado!!")
+                                            }
                                         }
                                     }
                                 }
                             }
+                            cargar.dismiss()
+                            finish()
                         }
-                        cargar.dismiss()
-                        finish()
-                    }
-                    else if(respuesta == false){
-                        println("=========> Not FOUND")
-                        getMessageFailed()
+                        else if(respuesta == false){
+                            println("=========> Not FOUND")
+                            getMessageFailed()
+                        }
                     }
                 }
             }
+        }
+        catch (e:Exception){
+            Toast.makeText(this, "¡Error interno del servidor!", Toast.LENGTH_SHORT).show()
         }
     }
 

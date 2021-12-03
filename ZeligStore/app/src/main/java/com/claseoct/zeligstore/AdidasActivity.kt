@@ -7,6 +7,7 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.claseoct.zeligstore.APISpring.ZapatosAPI
@@ -56,33 +57,38 @@ class AdidasActivity : AppCompatActivity() {
     }
 
     private fun mostrarZapatos(marca:String,categoria:String){
-        CoroutineScope(Dispatchers.IO).launch {
+        try {
+            CoroutineScope(Dispatchers.IO).launch {
 
-            if(categoria.equals("Todos")){
-                call = getRetrofit().create(ZapatosAPI::class.java).showAllShoes2("showAllZapatos/$marca")
-            }else{
-                call = getRetrofit().create(ZapatosAPI::class.java).showAllShoes2("showAllZapatosByCategory/$categoria/$marca")
-            }
-            val respuesta = call.body()?: emptyList()
+                if(categoria.equals("Todos")){
+                    call = getRetrofit().create(ZapatosAPI::class.java).showAllShoes2("showAllZapatos/$marca")
+                }else{
+                    call = getRetrofit().create(ZapatosAPI::class.java).showAllShoes2("showAllZapatosByCategory/$categoria/$marca")
+                }
+                val respuesta = call.body()?: emptyList()
 
-            runOnUiThread{
-                if(call.isSuccessful){
-                    for(i in respuesta){
-                        println("Modelo: " + i.idmodelo.nombremod)
-                        println("Marca: " + i.idmodelo.idmarca.nombremar)
-                        println("Precio: " + i.precio)
-                        println("Talla: " + i.talla)
-                        println("-------------------")
-                        listaZapatos.clear()
-                        listaZapatos.addAll(respuesta)
-                        adapterRecycler.notifyDataSetChanged()
-                        iniciarRecyclerView()
+                runOnUiThread{
+                    if(call.isSuccessful){
+                        for(i in respuesta){
+                            println("Modelo: " + i.idmodelo.nombremod)
+                            println("Marca: " + i.idmodelo.idmarca.nombremar)
+                            println("Precio: " + i.precio)
+                            println("Talla: " + i.talla)
+                            println("-------------------")
+                            listaZapatos.clear()
+                            listaZapatos.addAll(respuesta)
+                            adapterRecycler.notifyDataSetChanged()
+                            iniciarRecyclerView()
+                        }
+                    }
+                    else{
+                        println("Error al traer los datos")
                     }
                 }
-                else{
-                    println("Error al traer los datos")
-                }
             }
+        }
+        catch (e:Exception){
+            Toast.makeText(this, "¡Error interno del servidor!", Toast.LENGTH_SHORT).show()
         }
     }
 

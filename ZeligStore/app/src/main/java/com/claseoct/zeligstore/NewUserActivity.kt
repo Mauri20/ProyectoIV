@@ -108,68 +108,74 @@ class NewUserActivity : AppCompatActivity() {
             val dialogo =
                 AlertDialog.Builder(this) // NombreDeTuActividad.this, o getActivity() si es dentro de un fragmento
                     .setPositiveButton("Registrame") { dialog, which ->
-                        CoroutineScope(Dispatchers.IO).launch {
-                            val call = getRetrofit().create(UsersAPI::class.java).verifyUser(user)
-                            val respuesta = call.body()
+                        try {
+                            CoroutineScope(Dispatchers.IO).launch {
+                                val call = getRetrofit().create(UsersAPI::class.java).verifyUser(user)
+                                val respuesta = call.body()
 
-                            runOnUiThread{
-                                if(call.isSuccessful){
-                                    if(respuesta == true){
-                                        println("=========> USUARIO ENCONTRADO")
-                                        getMessageFailed()
-                                    }
-                                    else if(respuesta == false){
-                                        println("=========> Not FOUND")
-                                        if(chbx_admin.isChecked){
-                                            admin = 1
-
-                                            val builder = AlertDialog.Builder(this@NewUserActivity)
-                                            val inflater:LayoutInflater = layoutInflater
-                                            val dialogLayout:View = inflater.inflate(R.layout.edittext_dialog, null)
-                                            val editText:EditText = dialogLayout.findViewById<EditText>(R.id.et_securepin)
-
-                                            with(builder){
-                                                setTitle("¡Código de acceso necesario!")
-                                                setPositiveButton("Verificar"){dialog, which->
-
-                                                    var pin = editText.text.toString().toInt()
-
-                                                    if(pin == accessPin){
-                                                        //Aca estamos haciendo uso del consumo de una API montada en un servidor remoto
-                                                        //===============================================================================
-                                                        val user:UsersClass = UsersClass(null, name, phone, user, password, admin)
-                                                        GuardarNuevo(user)
-                                                        //===============================================================================
-                                                        getMessageSuccesfully()
-                                                        getRedirectLoginActivity()
-                                                        finish()
-                                                    }
-                                                    else{
-                                                        getMessageFailedPin()
-                                                    }
-                                                }
-                                                setNegativeButton("Cancelar"){dialog, which->
-                                                    dialog.dismiss()
-                                                }
-                                                setView(dialogLayout)
-                                                show()
-                                            }
+                                //Regresamos al hilo principal
+                                runOnUiThread{
+                                    if(call.isSuccessful){
+                                        if(respuesta == true){
+                                            println("=========> USUARIO ENCONTRADO")
+                                            getMessageFailed()
                                         }
-                                        else{
-                                            admin = 0
+                                        else if(respuesta == false){
+                                            println("=========> Not FOUND")
+                                            if(chbx_admin.isChecked){
+                                                admin = 1
 
-                                            //Aca estamos haciendo uso del consumo de una API montada en un servidor remoto
-                                            //===============================================================================
-                                            val user:UsersClass = UsersClass(null, name, phone, user, password, admin)
-                                            GuardarNuevo(user)
-                                            //===============================================================================
-                                            getMessageSuccesfully()
-                                            getRedirectLoginActivity()
-                                            finish()
+                                                val builder = AlertDialog.Builder(this@NewUserActivity)
+                                                val inflater:LayoutInflater = layoutInflater
+                                                val dialogLayout:View = inflater.inflate(R.layout.edittext_dialog, null)
+                                                val editText:EditText = dialogLayout.findViewById<EditText>(R.id.et_securepin)
+
+                                                with(builder){
+                                                    setTitle("¡Código de acceso necesario!")
+                                                    setPositiveButton("Verificar"){dialog, which->
+
+                                                        var pin = editText.text.toString().toInt()
+
+                                                        if(pin == accessPin){
+                                                            //Aca estamos haciendo uso del consumo de una API montada en un servidor remoto/externo
+                                                            //===============================================================================
+                                                            val user:UsersClass = UsersClass(null, name, phone, user, password, admin)
+                                                            GuardarNuevo(user)
+                                                            //===============================================================================
+                                                            getMessageSuccesfully()
+                                                            getRedirectLoginActivity()
+                                                            finish()
+                                                        }
+                                                        else{
+                                                            getMessageFailedPin()
+                                                        }
+                                                    }
+                                                    setNegativeButton("Cancelar"){dialog, which->
+                                                        dialog.dismiss()
+                                                    }
+                                                    setView(dialogLayout)
+                                                    show()
+                                                }
+                                            }
+                                            else{
+                                                admin = 0
+
+                                                //Aca estamos haciendo uso del consumo de una API montada en un servidor remoto
+                                                //===============================================================================
+                                                val user:UsersClass = UsersClass(null, name, phone, user, password, admin)
+                                                GuardarNuevo(user)
+                                                //===============================================================================
+                                                getMessageSuccesfully()
+                                                getRedirectLoginActivity()
+                                                finish()
+                                            }
                                         }
                                     }
                                 }
                             }
+                        }
+                        catch (e:Exception){
+                            Toast.makeText(this, "¡Error interno del servidor!", Toast.LENGTH_SHORT).show()
                         }
                     }
                     .setNegativeButton(

@@ -9,9 +9,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:inputType="number"
+        android:inputType="numberPassword"
         android:hint="Ingresa el pin de seguridad"
         android:layout_marginHorizontal="20dp"></EditText>
+
 
 
 </LinearLayout>
